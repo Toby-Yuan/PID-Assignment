@@ -148,3 +148,24 @@ nav{
         }
     }
 }
+
+footer{
+    width: 100%;
+    background: $red;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-top: 80px;
+
+    #contact{
+        width: 600px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+        
+    
+        #logo{
+            text-align: right;
+        }
+    }
+}

@@ -150,4 +150,26 @@ nav #box #member {
 #product #link a:hover {
   color: #d33569;
 }
+
+footer {
+  width: 100%;
+  background: #d33569;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-top: 80px;
+}
+
+footer #contact {
+  width: 600px;
+  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+footer #contact #logo {
+  text-align: right;
+}
 /*# sourceMappingURL=indexStyle.css.map */

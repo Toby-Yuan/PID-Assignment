@@ -62,5 +62,20 @@
         </div>
     </section>
 
+    <!-- 聯絡我們 -->
+    <footer>
+        <div id="contact">
+            <div id="logo">
+                <h1>三點半</h1>
+            </div>
+            <div id="content">
+                <p>
+                    地址: 台中市西屯區逢甲路20巷<br>
+                    聯絡電話: (04)4536782
+                </p>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
