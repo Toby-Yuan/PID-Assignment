@@ -42,4 +42,11 @@ nav #box #link {
 nav #box #member {
   text-align: right;
 }
+
+#banner {
+  width: 100%;
+  height: 400px;
+  background-image: url(index_banner.jpg);
+  background-position: center;
+}
 /*# sourceMappingURL=indexStyle.css.map */
