@@ -6,4 +6,40 @@
           box-sizing: border-box;
   font-family: 微軟正黑體;
 }
+
+nav {
+  background: rgba(218, 218, 218, 0.884);
+}
+
+nav #box {
+  width: 1200px;
+  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 50% 30% 20%;
+      grid-template-columns: 50% 30% 20%;
+  padding: 12px 5px;
+}
+
+nav #box a {
+  text-decoration: none;
+  color: black;
+  font-size: 24px;
+}
+
+nav #box a:nth-child(1) {
+  color: #d33569;
+}
+
+nav #box #link {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+
+nav #box #member {
+  text-align: right;
+}
 /*# sourceMappingURL=indexStyle.css.map */

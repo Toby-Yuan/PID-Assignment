@@ -1,6 +1,45 @@
+$gray : rgba(218, 218, 218, 0.884);
+$red : rgb(211, 53, 105);
+
+@mixin box {
+    width: 1200px;
+    margin: 0 auto;
+}
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 微軟正黑體;
+}
+
+nav{
+    background: $gray;
+    
+    #box{
+        @include box();
+        display: grid;
+        grid-template-columns: 50% 30% 20%;
+        padding: 12px 5px;
+
+        a{
+            text-decoration: none;
+            color: black;
+            font-size: 24px;
+
+            &:nth-child(1){
+                color: $red;
+            }
+        }
+
+        #link{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+        #member{
+            text-align: right;
+        }
+    }
 }
