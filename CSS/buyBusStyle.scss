@@ -1,6 +1,9 @@
 $gray : rgb(218, 218, 218);
 $red : rgb(211, 53, 105);
 $name : rgba(218, 218, 218, 0.637);
+$add : rgb(53, 103, 211);
+$cut : rgb(39, 197, 33);
+$del : rgb(156, 75, 75);
 
 @mixin box {
     width: 1200px;
@@ -57,6 +60,74 @@ nav{
     height: 400px;
     background-image: url(index_banner.jpg);
     background-position: center;
+}
+
+#buyBus{
+    @include box();
+
+    .detail{
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: 30% 50% 20%;
+        grid-gap: 20px;
+
+        .image{
+            width: 100%;
+            height: 200px;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .text{
+            padding: 10px;
+
+            h1{
+                margin-bottom: 20px;
+            }
+
+            p{
+                line-height: 1.8;
+            }
+        }
+
+        .btnGroup{
+            height: 100%;
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+        }
+
+        .btn{
+            display: block;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 20px;
+            text-align: center;
+            align-items: center;
+
+            &:nth-child(1){
+                background: $add;
+            }
+
+            &:nth-child(2){
+                background: $cut;
+            }
+
+            &:nth-child(3){
+                background: $del;
+            }
+        }
+    }
+
+    #line{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+        height: 3px;
+        background: $red;
+    }
 }
 
 footer{
