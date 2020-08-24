@@ -45,5 +45,18 @@
         </div>
     </section>
 
+    <!-- 熱門產品 -->
+    <section id="product">
+        <div class="products">
+            <div class="name">巫女們的宴會</div>
+        </div>
+        <div class="products">
+            <div class="name">少女的酸甜</div>
+        </div>
+        <div class="products">
+            <div class="name">梵谷的星空</div>
+        </div>
+    </section>
+
 </body>
 </html>

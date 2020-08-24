@@ -84,4 +84,54 @@ nav #box #member {
   line-height: 2;
   letter-spacing: 5px;
 }
+
+#product {
+  width: 1200px;
+  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+  margin-top: 40px;
+}
+
+#product .products {
+  width: 100%;
+  height: 250px;
+  position: relative;
+}
+
+#product .products:nth-child(1) {
+  background-image: url(index_product1.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+#product .products:nth-child(2) {
+  background-image: url(index_product2.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+#product .products:nth-child(3) {
+  background-image: url(index_product3.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+#product .products .name {
+  display: none;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: rgba(218, 218, 218, 0.637);
+  text-align: center;
+  font-size: 16px;
+  padding: 8px 0;
+}
+
+#product .products:hover .name {
+  display: inline;
+}
 /*# sourceMappingURL=indexStyle.css.map */
