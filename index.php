@@ -18,12 +18,12 @@
             <div id="link">
                 <a href="#">三點半</a>
                 <a href="#about">關於我們</a>
-                <a href="#product">熱門商品</a>
+                <a href="product.php">熱門商品</a>
                 <a href="#contact">聯絡我們</a>
             </div>
             <div></div>
             <div id="member">
-                <a href="">登入</a>
+                <a id="loginOpen">登入</a>
             </div>
 
         </div>
@@ -61,9 +61,26 @@
         </div>
 
         <div id="link">
-            <a href="">MORE _______</a>
+            <a href="product.php">MORE _______</a>
         </div>
     </section>
+
+    <!-- 登入區塊 -->
+    <div id="login">
+        <div id="loginInput">
+            <div id="image"></div>
+            <div id="text">
+                <form action="" method="POST">
+                    <label for="userName">帳號</label>
+                    <input type="text" name="userName" id="userName">
+                    <label for="userPassword">密碼</label>
+                    <input type="text" name="userPassword" id="userPassword">
+                    <input type="submit" value="送出" id="submit">
+                </form>
+                <div id="close"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- 聯絡我們 -->
     <footer>
@@ -80,5 +97,22 @@
         </div>
     </footer>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function (){
+            $("#login").hide();
+
+            $("#member").on("click", function(){
+                $("#login").show();
+            });
+
+            $("#close").on("click", function(){
+                $("#userName").val("");
+                $("#userPassword").val("");
+                $("#login").hide();
+            });
+        });
+
+    </script>
 </body>
 </html>
