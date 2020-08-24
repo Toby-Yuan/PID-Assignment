@@ -56,6 +56,10 @@
         <div class="products">
             <div class="name">梵谷的星空</div>
         </div>
+
+        <div id="link">
+            <a href="">MORE _______</a>
+        </div>
     </section>
 
 </body>

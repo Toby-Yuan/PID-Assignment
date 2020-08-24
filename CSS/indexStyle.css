@@ -94,6 +94,7 @@ nav #box #member {
       grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
   margin-top: 40px;
+  position: relative;
 }
 
 #product .products {
@@ -133,5 +134,20 @@ nav #box #member {
 
 #product .products:hover .name {
   display: inline;
+}
+
+#product #link {
+  position: absolute;
+  right: 0;
+  bottom: -35px;
+}
+
+#product #link a {
+  text-decoration: none;
+  color: black;
+}
+
+#product #link a:hover {
+  color: #d33569;
 }
 /*# sourceMappingURL=indexStyle.css.map */

@@ -90,6 +90,7 @@ nav{
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
     margin-top: 40px;
+    position: relative;
 
     .products{
         width: 100%;
@@ -128,6 +129,21 @@ nav{
         &:hover{
             .name{
                 display: inline;
+            }
+        }
+    }
+
+    #link{
+        position: absolute;
+        right: 0;
+        bottom: -35px;
+
+        a{
+            text-decoration: none;
+            color: black;
+
+            &:hover{
+                color: $red;
             }
         }
     }
