@@ -71,6 +71,11 @@
         <div id="totalPrice">
             <h1>總額: <span id="getTotal">0</span></h1>
         </div>
+
+        <div id="subGroup">
+            <input type="submit" value="確認訂單" id="submit" name="submit">
+            <input type="submit" value="取消訂單" id="cancel" name="cancel">
+        </div>
     </form>
 
     <!-- 聯絡我們 -->
