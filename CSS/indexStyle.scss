@@ -1,4 +1,4 @@
-$gray : rgba(218, 218, 218, 0.884);
+$gray : rgb(218, 218, 218);
 $red : rgb(211, 53, 105);
 
 @mixin box {
@@ -15,6 +15,8 @@ $red : rgb(211, 53, 105);
 
 nav{
     background: $gray;
+    position: fixed;
+    width: 100%;
     
     #box{
         @include box();
