@@ -9,6 +9,12 @@
 
 </head>
 <body>
-    
+    <nav>
+        <div id="box">
+            <div id="link"></div>
+            <div></div>
+            <div id="login"></div>
+        </div>
+    </nav>
 </body>
 </html>
