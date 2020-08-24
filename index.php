@@ -34,6 +34,7 @@
 
     <!-- 關於我們 -->
     <section id="about">
+        <h1>關於我們</h1>
         <div id="image"></div>
         <div id="text">
             <h5>三點半 3.PI</h5>
@@ -46,6 +47,8 @@
     </section>
 
     <!-- 熱門產品 -->
+    <h1 id="productText">熱門產品</h1>
+
     <section id="product">
         <div class="products">
             <div class="name">巫女們的宴會</div>
@@ -66,7 +69,7 @@
     <footer>
         <div id="contact">
             <div id="logo">
-                <h1>三點半</h1>
+                <h2>三點半</h2>
             </div>
             <div id="content">
                 <p>
