@@ -1,0 +1,81 @@
+$gray : rgb(218, 218, 218);
+$red : rgb(211, 53, 105);
+$name : rgba(218, 218, 218, 0.637);
+
+@mixin box {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+@mixin bigText {
+    text-align: center;
+    font-size: 40px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 微軟正黑體;
+}
+
+nav{
+    background: $gray;
+    position: fixed;
+    width: 100%;
+    
+    #box{
+        @include box();
+        display: grid;
+        grid-template-columns: 50% 30% 20%;
+        padding: 12px 5px;
+
+        a{
+            text-decoration: none;
+            color: black;
+            font-size: 24px;
+
+            &:nth-child(1){
+                color: $red;
+            }
+        }
+
+        #link{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+        #member{
+            text-align: right;
+        }
+    }
+}
+
+#banner{
+    width: 100%;
+    height: 400px;
+    background-image: url(index_banner.jpg);
+    background-position: center;
+}
+
+footer{
+    width: 100%;
+    background: $red;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-top: 80px;
+
+    #contact{
+        width: 600px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+        
+    
+        #logo{
+            text-align: right;
+        }
+    }
+}
