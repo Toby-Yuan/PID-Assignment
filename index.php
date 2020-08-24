@@ -9,11 +9,23 @@
 
 </head>
 <body>
+
+    <!-- 導覽列 -->
     <nav>
         <div id="box">
-            <div id="link"></div>
+
+            <!--  本頁面各連結 -->
+            <div id="link">
+                <a href="">三點半</a>
+                <a href="">關於我們</a>
+                <a href="">熱門商品</a>
+                <a href="">聯絡我們</a>
+            </div>
             <div></div>
-            <div id="login"></div>
+            <div id="member">
+                <a href="">登入</a>
+            </div>
+            
         </div>
     </nav>
 </body>
