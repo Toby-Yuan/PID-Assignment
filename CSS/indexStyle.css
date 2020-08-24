@@ -51,4 +51,37 @@ nav #box #member {
   background-image: url(index_banner.jpg);
   background-position: center;
 }
+
+#about {
+  width: 1200px;
+  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  margin-top: 40px;
+}
+
+#about #image {
+  width: 100%;
+  height: 250px;
+  background-image: url(index_about.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+#about #text {
+  padding: 20px 0;
+}
+
+#about #text h5 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#about #text p {
+  line-height: 2;
+  letter-spacing: 5px;
+}
 /*# sourceMappingURL=indexStyle.css.map */
