@@ -28,5 +28,8 @@
 
         </div>
     </nav>
+
+    <!-- 輪轉圖 -->
+    <div id="banner"></div>
 </body>
 </html>
