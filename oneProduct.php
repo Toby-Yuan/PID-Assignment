@@ -85,10 +85,7 @@ if(isset($_POST["submit"])){
     </div>
 
     <!-- 測試 -->
-    <div id="test">
-        <p>here</p>
-        <?php var_dump($_SESSION["productNeed"]); ?>
-    </div>
+    
 
     <!-- 聯絡我們 -->
     <footer>
