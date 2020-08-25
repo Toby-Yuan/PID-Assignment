@@ -15,6 +15,7 @@ if(!isset($_GET["productId"])){
 }
 
 if(isset($_POST["submit"])){
+    // $_SESSION["productNeed"] = array();
     $arrayNeed[$productId] = $_POST["need"];
     array_push($_SESSION["productNeed"], $arrayNeed);
 };
@@ -78,6 +79,12 @@ if(isset($_POST["submit"])){
             <input type="submit" value="送出" name="submit">
         </form>
     </div>
+
+    <!-- 測試 -->
+    <!-- <div id="test">
+        <p>here</p>
+        <?php var_dump($_SESSION["productNeed"]); ?>
+    </div> -->
 
     <!-- 聯絡我們 -->
     <footer>

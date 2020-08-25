@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+require_once("connect.php");
+
+$arrayNeed = $_SESSION["productNeed"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -23,7 +32,14 @@
             </div>
             <div></div>
             <div id="member">
-                <a id="loginOpen">登入</a>
+                <?php if(isset($_SESSION["uid"])) { ?>
+                    <a href="member.php">會員中心</a>
+                    &nbsp;
+                    <a href="buyBus.php">購物車</a>
+                    <a href="index.php?logout=1">登出</a>
+                <?php } else { ?>
+                    <a id="loginOpen">登入</a>
+                <?php } ?>
             </div>
 
         </div>
@@ -32,9 +48,57 @@
     <!-- 輪轉圖 -->
     <div id="banner"></div>
 
+    <!-- 測試區域
+    <div id="test">
+        
+         foreach($arrayNeed as $key => $value){
+            foreach($value as $productId => $need){
+                echo $productId . $need;
+            }
+        } 
+
+        count($arrayNeed) 
+        
+    </div> -->
+
     <!-- 購物車 -->
     <form action="" method="post" id="buyBus">
-        <div class="detail" id="detail1">
+        <?php
+        $i = 1;
+        foreach($arrayNeed as $key => $value){
+            
+            foreach($value as $productId => $need){ 
+                $search = "SELECT * FROM product WHERE id = $productId";
+                $result = mysqli_query($link, $search);
+                $row = mysqli_fetch_assoc($result);
+                ?>
+                
+
+                <div class="detail" id="<?= "detail$i" ?>">
+                    <div class="image" style="background-image: url(CSS/product<?= $productId ?>.jpg)"></div>
+                    <div class="text">
+                        <h1><?= $row["productName"] ?></h1>
+                        <p>
+                            定價: <span id="<?= "price$i" ?>"><?= $row["price"] ?></span> <br>
+                            數量: <span id="<?= "need$i" ?>" class="need"><?= $need ?></span> <br>
+                            小記: <span id="<?= "total$i" ?>" class="need">0</span>
+                        </p>
+                    </div>
+                    <div class="btnGroup">
+                        <a class="btn" id="<?= "add$i" ?>">+</a>
+                        <a class="btn" id="<?= "cut$i" ?>">-</a>
+                        <a class="btn" id="<?= "del$i" ?>">x</a>
+                    </div>
+                </div>
+                
+        <?php  
+                $i++;
+            }
+        }
+        ?>
+
+
+        <!-- <div class="detail" id="detail1">
             <div class="image" style="background-image: url(CSS/product3.jpg)"></div>
             <div class="text">
                 <h1>少女的酸甜</h1>
@@ -64,7 +128,7 @@
                 <a class="btn" id="cut2">-</a>
                 <a class="btn" id="del2">x</a>
             </div>
-        </div>
+        </div> -->
 
         <div id="line"> </div>
 
@@ -98,69 +162,84 @@
         $(document).ready(function(){
             function totalPrice (number, price){
                 var total = number * price;
-                console.log(total);
                 return total;
             }
 
-            var need1 = $("#need1").text();
-            var price1 = $("#price1").text();
-            var total1 = totalPrice(need1, price1);
-            $("#add1").on("click", function (){
-                need1++;
-                $("#need1").text(need1);
-                total1 = totalPrice(need1, price1);
-                totalA = total1 + total2;
-                $("#getTotal").text(totalA);
-            });
+            var totalA = 0;
 
-            $("#cut1").on("click", function (){
-                if(need1 > 1){
-                    need1--;
-                    $("#need1").text(need1);
-                    total1 = totalPrice(need1, price1);
-                    totalA = total1 + total2;
+            <?php for($i = 1; $i <= count($arrayNeed); $i++) { ?>
+                var <?= "need$i" ?> = $("<?= "#need$i" ?>").text();
+                var <?= "price$i" ?> = $("<?= "#price$i" ?>").text();
+                var <?= "total$i" ?> = totalPrice(<?= "need$i" ?>, <?= "price$i" ?>);
+                $("<?= "#total$i" ?>").text(<?= "total$i" ?>);
+                $("<?= "#add$i" ?>").on("click", function (){
+                    <?= "need$i" ?>++;
+                    $("<?= "#need$i" ?>").text(<?= "need$i" ?>);
+                    <?= "total$i" ?> = totalPrice(<?= "need$i" ?>, <?= "price$i" ?>);
+                    allTotal();
                     $("#getTotal").text(totalA);
-                };
-            });
+                    $("<?= "#total$i" ?>").text(<?= "total$i" ?>);
+                });
 
-            $("#del1").on("click",function (){
-                $("#detail1").hide();
-                need1 = 0;
-                total1 = totalPrice(need1, price1);
-                totalA = total1 + total2;
-                $("#getTotal").text(totalA);
-            });
+                $("<?= "#cut$i" ?>").on("click", function (){
+                    if(<?= "need$i" ?> > 1){
+                        <?= "need$i" ?>--;
+                        $("<?= "#need$i" ?>").text(<?= "need$i" ?>);
+                        <?= "total$i" ?> = totalPrice(<?= "need$i" ?>, <?= "price$i" ?>);
+                        allTotal();
+                        $("#getTotal").text(totalA);
+                        $("<?= "#total$i" ?>").text(<?= "total$i" ?>);
+                    };
+                });
 
-            var need2 = $("#need2").text();
-            var price2 = $("#price2").text();
-            var total2 = totalPrice(need2, price2);
-            $("#add2").on("click", function (){
-                need2++;
-                $("#need2").text(need2);
-                total2 = totalPrice(need2, price2);
-                totalA = total1 + total2;
-                $("#getTotal").text(totalA);
-            });
-
-            $("#cut2").on("click", function (){
-                if(need2 > 1){
-                    need2--;
-                    $("#need2").text(need2);
-                    total2 = totalPrice(need2, price2);
-                    totalA = total1 + total2;
+                $("<?= "#del$i" ?>").on("click",function (){
+                    $("<?= "#detail$i" ?>").hide();
+                    <?= "need$i" ?> = 0;
+                    <?= "total$i" ?> = totalPrice(<?= "need$i" ?>, <?= "price$i" ?>);
+                    allTotal();
                     $("#getTotal").text(totalA);
-                };
-            });
+                });
+            <?php } ?>
 
-            $("#del2").on("click",function (){
-                $("#detail2").hide();
-                need2 = 0;
-                total2 = totalPrice(need2, price2);
-                totalA = total1 + total2;
-                $("#getTotal").text(totalA);
-            });
+            // var need1 = $("#need1").text();
+            // var price1 = $("#price1").text();
+            // var total1 = totalPrice(need1, price1);
+            // $("#total1").text(total1);
+            // $("#add1").on("click", function (){
+            //     need1++;
+            //     $("#need1").text(need1);
+            //     total1 = totalPrice(need1, price1);
+            //     totalA = total1 + total2;
+            //     $("#getTotal").text(totalA);
+            //     $("#total1").text(total1);
+            // });
 
-            var totalA = total1 + total2;
+            // $("#cut1").on("click", function (){
+            //     if(need1 > 1){
+            //         need1--;
+            //         $("#need1").text(need1);
+            //         total1 = totalPrice(need1, price1);
+            //         totalA = total1 + total2;
+            //         $("#getTotal").text(totalA);
+            //         $("#total1").text(total1);
+            //     };
+            // });
+
+            // $("#del1").on("click",function (){
+            //     $("#detail1").hide();
+            //     need1 = 0;
+            //     total1 = totalPrice(need1, price1);
+            //     totalA = total1 + total2;
+            //     $("#getTotal").text(totalA);
+            // });
+
+            function allTotal(){
+                totalA = 0;
+                <?php for($i = 1; $i <= count($arrayNeed); $i++) { ?>
+                    totalA += <?= "total$i" ?>;
+                <?php } ?>
+            }
+            allTotal();
             $("#getTotal").text(totalA);
         });
     </script>
