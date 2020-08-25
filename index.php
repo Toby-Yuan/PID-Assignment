@@ -76,6 +76,7 @@
                     <label for="userPassword">密碼</label>
                     <input type="text" name="userPassword" id="userPassword">
                     <input type="submit" value="送出" id="submit">
+                    <a href="create.php">會員註冊</a>
                 </form>
                 <div id="close"></div>
             </div>
