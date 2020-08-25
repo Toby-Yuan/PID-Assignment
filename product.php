@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+require_once("connect.php");
+
+$searchAll = "SELECT * FROM `product`";
+$result = mysqli_query($link, $searchAll);
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -23,7 +35,14 @@
             </div>
             <div></div>
             <div id="member">
-                <a href="">登入</a>
+                <?php if(isset($_SESSION["uid"])) { ?>
+                    <a href="member.php">會員中心</a>
+                    &nbsp;
+                    <a href="buyBus.php">購物車</a>
+                    <a href="index.php?logout=1">登出</a>
+                <?php } else { ?>
+                    <a id="loginOpen">登入</a>
+                <?php } ?>
             </div>
 
         </div>
@@ -34,30 +53,14 @@
 
     <!-- 產品 -->
         <div id="product">
-            <a href="">
-                <div>
-                    <div class="image" style="background-image: url(CSS/product1.jpg)"></div>
-                    <p>田園風采</p>
-                </div>
-            </a>
-            <a href="">
-                <div>
-                    <div class="image" style="background-image: url(CSS/product2.jpg)"></div>
-                    <p>女巫們的宴會</p>
-                </div>
-            </a>
-            <a href="">
-                <div>
-                    <div class="image" style="background-image: url(CSS/product3.jpg)"></div>
-                    <p>少女的酸甜</p>
-                </div>
-            </a>
-            <a href="">
-                <div>
-                    <div class="image" style="background-image: url(CSS/product4.jpg)"></div>
-                    <p>梵谷的星空</p>
-                </div>
-            </a>
+            <?php while( $row = mysqli_fetch_assoc($result) ) { ?>
+                <a href="">
+                    <div>
+                        <div class="image" style="background-image: url(CSS/product<?= $row["id"] ?>.jpg)"></div>
+                        <p><?= $row["productName"] ?></p>
+                    </div>
+                </a>
+            <?php } ?>
         </div>
 
     <!-- 聯絡我們 -->
