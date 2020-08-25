@@ -32,6 +32,23 @@
     <!-- 輪轉圖 -->
     <div id="banner"></div>
 
+    <!-- 產品介紹 -->
+    <div id="product">
+        <div id="image" style="background-image: url(CSS/product1.jpg)"></div>
+        <form action="" method="post">
+            <h1>田園風光</h1>
+            <h2>定價: <span>220</span></h2>
+
+            <div id="select">
+                <div class="btn" id="cut">-</div>
+                <input type="text" id="need" name="need" value="0">
+                <div class="btn" id="sub">+</div>
+            </div>
+
+            <input type="submit" value="送出">
+        </form>
+    </div>
+
     <!-- 聯絡我們 -->
     <footer>
         <div id="contact">
@@ -50,6 +67,20 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        $(document).ready(function (){
+            var need = $("#need").val();
+            $("#sub").on("click",function (){
+                need++;
+                $("#need").val(need);
+            });
+
+            $("#cut").on("click", function (){
+                if(need > 0){
+                    need--;
+                    $("#need").val(need);
+                }
+            });
+        });
     </script>
 </body>
 </html>
