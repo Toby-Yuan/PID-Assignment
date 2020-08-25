@@ -6,7 +6,29 @@ require_once("connect.php");
 $searchAll = "SELECT * FROM `product`";
 $result = mysqli_query($link, $searchAll);
 
+if($_POST["submit"]){
 
+    $userName = $_POST["userName"];
+    $userPassword = $_POST["userPassword"];
+
+    if(isset($userName)){
+        $search = <<<searchIt
+        SELECT id, userName, userPassword
+        FROM member
+        WHERE userName = '$userName';
+        searchIt;
+        $result = mysqli_query($link, $search);
+        $row = mysqli_fetch_assoc($result);
+        $passwordCheck = $row["userPassword"];
+
+        if($userPassword == $passwordCheck){
+            $_SESSION["uid"] = $row["id"];
+            header("location: index.php");
+            exit();
+        }
+    }
+
+}
 
 ?>
 
@@ -63,6 +85,24 @@ $result = mysqli_query($link, $searchAll);
             <?php } ?>
         </div>
 
+    <!-- 登入區塊 -->
+    <div id="login">
+        <div id="loginInput">
+            <div id="image"></div>
+            <div id="text">
+                <form action="" method="POST">
+                    <label for="userName">帳號</label>
+                    <input type="text" name="userName" id="userName">
+                    <label for="userPassword">密碼</label>
+                    <input type="text" name="userPassword" id="userPassword">
+                    <input type="submit" value="送出" id="submit" name="submit">
+                    <a href="create.php">會員註冊</a>
+                </form>
+                <button id="close">X</button>
+            </div>
+        </div>
+    </div>
+
     <!-- 聯絡我們 -->
     <footer>
         <div id="contact">
@@ -81,6 +121,19 @@ $result = mysqli_query($link, $searchAll);
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        $(document).ready(function (){
+            $("#login").hide();
+
+            $("#member").on("click", function(){
+                $("#login").show();
+            });
+
+            $("#close").on("click", function(){
+                $("#userName").val("");
+                $("#userPassword").val("");
+                $("#login").hide();
+            });
+        });
     </script>
 </body>
 </html>
