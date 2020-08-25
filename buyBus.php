@@ -14,7 +14,7 @@ if(isset($_POST["submit"])){
     addorder;
     mysqli_query($link, $addOrder);
 
-    $searchOrder = "SELECT id FROM memberOrder WHERE orderDate = '$nowtime'";
+    $searchOrder = "SELECT id FROM memberOrder WHERE orderDate = '$nowtime' AND memberId = $memberId";
     $result = mysqli_query($link, $searchOrder);
     $thisOrder = mysqli_fetch_assoc($result);
     $thisId = $thisOrder["id"];
@@ -23,11 +23,14 @@ if(isset($_POST["submit"])){
     foreach($arrayNeed as $key => $value){
         foreach($value as $productId => $need){
             $demand = $_POST["need$i"];
+            // echo $demand;
             if($demand > 0){
                 $addDetail = <<<adddetail
                 INSERT INTO orderDetail (orderId, productId, demand)
                 VALUES ($thisId, $productId, $demand);
                 adddetail;
+                // echo $addDetail;
+                // exit();
                 mysqli_query($link, $addDetail);
             }
             $i++;
