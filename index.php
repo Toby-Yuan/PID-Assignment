@@ -1,3 +1,41 @@
+<?php
+
+require_once("connect.php");
+session_start();
+
+if($_POST["submit"]){
+
+    $userName = $_POST["userName"];
+    $userPassword = $_POST["userPassword"];
+
+    if(isset($userName)){
+        $search = <<<searchIt
+        SELECT id, userName, userPassword
+        FROM member
+        WHERE userName = '$userName';
+        searchIt;
+        $result = mysqli_query($link, $search);
+        $row = mysqli_fetch_assoc($result);
+        $passwordCheck = $row["userPassword"];
+
+        if($userPassword == $passwordCheck){
+            $_SESSION["uid"] = $row["id"];
+        }
+    }
+
+}
+
+if(isset($_GET["logout"])){
+    unset($_SESSION["uid"]);
+    unset($_SESSION["un"]);
+    session_unset();
+    session_destroy();
+    header("location: index.php");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -23,7 +61,14 @@
             </div>
             <div></div>
             <div id="member">
-                <a id="loginOpen">登入</a>
+                <?php if(isset($_SESSION["uid"])) { ?>
+                    <a href="member.php">會員中心</a>
+                    &nbsp;
+                    <a href="buyBus.php">購物車</a>
+                    <a href="index.php?logout=1">登出</a>
+                <?php } else { ?>
+                    <a id="loginOpen">登入</a>
+                <?php } ?>
             </div>
 
         </div>
@@ -75,12 +120,17 @@
                     <input type="text" name="userName" id="userName">
                     <label for="userPassword">密碼</label>
                     <input type="text" name="userPassword" id="userPassword">
-                    <input type="submit" value="送出" id="submit">
+                    <input type="submit" value="送出" id="submit" name="submit">
                     <a href="create.php">會員註冊</a>
                 </form>
                 <div id="close"></div>
             </div>
         </div>
+    </div>
+
+    <!-- 測試區域 -->
+    <div id="test">
+        
     </div>
 
     <!-- 聯絡我們 -->
