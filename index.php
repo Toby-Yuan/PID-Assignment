@@ -27,7 +27,6 @@ if($_POST["submit"]){
 
 if(isset($_GET["logout"])){
     unset($_SESSION["uid"]);
-    unset($_SESSION["un"]);
     session_unset();
     session_destroy();
     header("location: index.php");

@@ -14,6 +14,10 @@ if(!isset($_GET["productId"])){
     $row = mysqli_fetch_assoc($result);
 }
 
+if(!isset($_SESSION["productNeed"])){
+    $_SESSION["productNeed"] = array();
+}
+
 if(isset($_POST["submit"])){
     // $_SESSION["productNeed"] = array();
     $arrayNeed[$productId] = $_POST["need"];
@@ -81,10 +85,10 @@ if(isset($_POST["submit"])){
     </div>
 
     <!-- 測試 -->
-    <!-- <div id="test">
+    <div id="test">
         <p>here</p>
         <?php var_dump($_SESSION["productNeed"]); ?>
-    </div> -->
+    </div>
 
     <!-- 聯絡我們 -->
     <footer>

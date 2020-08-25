@@ -4,6 +4,42 @@ session_start();
 require_once("connect.php");
 
 $arrayNeed = $_SESSION["productNeed"];
+$memberId = $_SESSION["uid"];
+
+if(isset($_POST["submit"])){
+    $nowtime = $_POST["time"];
+    $addOrder = <<<addorder
+    INSERT INTO memberOrder (memberId, orderDate)
+    VALUES ($memberId, '$nowtime');
+    addorder;
+    mysqli_query($link, $addOrder);
+
+    $searchOrder = "SELECT id FROM memberOrder WHERE orderDate = '$nowtime'";
+    $result = mysqli_query($link, $searchOrder);
+    $thisOrder = mysqli_fetch_assoc($result);
+    $thisId = $thisOrder["id"];
+
+    $i = 1;
+    foreach($arrayNeed as $key => $value){
+        foreach($value as $productId => $need){
+            $demand = $_POST["need$i"];
+            if($demand > 0){
+                $addDetail = <<<adddetail
+                INSERT INTO orderDetail (orderId, productId, demand)
+                VALUES ($thisId, $productId, $demand);
+                adddetail;
+                mysqli_query($link, $addDetail);
+            }
+            $i++;
+        }
+    }
+
+    unset($_SESSION["productNeed"]);
+    header("location: index.php");
+    exit();
+    
+}
+
 
 ?>
 
@@ -81,6 +117,7 @@ $arrayNeed = $_SESSION["productNeed"];
                         <p>
                             定價: <span id="<?= "price$i" ?>"><?= $row["price"] ?></span> <br>
                             數量: <span id="<?= "need$i" ?>" class="need"><?= $need ?></span> <br>
+                            <input type="text" name="<?= "need$i" ?>" id="<?= "tophp$i" ?>" style="display: none;" value="">
                             小記: <span id="<?= "total$i" ?>" class="need">0</span>
                         </p>
                     </div>
@@ -136,6 +173,9 @@ $arrayNeed = $_SESSION["productNeed"];
             <h1>總額: <span id="getTotal">0</span></h1>
         </div>
 
+        <label for="time" id="timeText">希望送達日期</label>
+        <input type="date" name="time" id="time">
+
         <div id="subGroup">
             <input type="submit" value="確認訂單" id="submit" name="submit">
             <input type="submit" value="取消訂單" id="cancel" name="cancel">
@@ -171,9 +211,13 @@ $arrayNeed = $_SESSION["productNeed"];
                 var <?= "need$i" ?> = $("<?= "#need$i" ?>").text();
                 var <?= "price$i" ?> = $("<?= "#price$i" ?>").text();
                 var <?= "total$i" ?> = totalPrice(<?= "need$i" ?>, <?= "price$i" ?>);
+                var demand = $("<?= "#need$i" ?>").text();
+                $("<?= "#tophp$i" ?>").val(demand);
                 $("<?= "#total$i" ?>").text(<?= "total$i" ?>);
                 $("<?= "#add$i" ?>").on("click", function (){
                     <?= "need$i" ?>++;
+                    demand = <?= "need$i" ?>;
+                    $("<?= "#tophp$i" ?>").val(demand);
                     $("<?= "#need$i" ?>").text(<?= "need$i" ?>);
                     <?= "total$i" ?> = totalPrice(<?= "need$i" ?>, <?= "price$i" ?>);
                     allTotal();
@@ -184,6 +228,8 @@ $arrayNeed = $_SESSION["productNeed"];
                 $("<?= "#cut$i" ?>").on("click", function (){
                     if(<?= "need$i" ?> > 1){
                         <?= "need$i" ?>--;
+                        demand = <?= "need$i" ?>;
+                        $("<?= "#tophp$i" ?>").val(demand);
                         $("<?= "#need$i" ?>").text(<?= "need$i" ?>);
                         <?= "total$i" ?> = totalPrice(<?= "need$i" ?>, <?= "price$i" ?>);
                         allTotal();
@@ -195,6 +241,8 @@ $arrayNeed = $_SESSION["productNeed"];
                 $("<?= "#del$i" ?>").on("click",function (){
                     $("<?= "#detail$i" ?>").hide();
                     <?= "need$i" ?> = 0;
+                    demand = <?= "need$i" ?>;
+                    $("<?= "#tophp$i" ?>").val(demand);
                     <?= "total$i" ?> = totalPrice(<?= "need$i" ?>, <?= "price$i" ?>);
                     allTotal();
                     $("#getTotal").text(totalA);

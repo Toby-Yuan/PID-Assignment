@@ -20,10 +20,10 @@ CREATE TABLE webMaster(
     grade int not null
 );
 
-CREATE TABLE order(
+CREATE TABLE memberOrder(
     id int not null auto_increment primary key,
     memberId int not null,
-    orderDate datetime not null
+    orderDate varchar(10) not null
 );
 
 CREATE TABLE orderDetail(
