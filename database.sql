@@ -38,3 +38,8 @@ CREATE TABLE product(
     productName varchar(10) not null,
     price int not null
 );
+
+-- 新增產品資料
+INSERT INTO product (productName, price) VALUES
+('田園風采', 220), ('女巫們的宴會', 180), ('少女的酸甜', 250), ('梵谷的星空', 150),
+('莓好世界', 200), ('小紅帽的竹籃', 180), ('觀察土星', 250), ('大吃莓一口', 120);
