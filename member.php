@@ -1,3 +1,22 @@
+<?php
+
+require_once("connect.php");
+session_start();
+
+if(!isset($_SESSION["uid"])){
+    header("location: index.php");
+    exit();
+}else{
+    $uid = $_SESSION["uid"];
+    $search = <<<searchIt
+    select userName FROM member WHERE id = $uid;
+    searchIt;
+    $result = mysqli_query($link, $search);
+    $row = mysqli_fetch_assoc($result);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -23,7 +42,10 @@
             </div>
             <div></div>
             <div id="member">
-                <a id="loginOpen">登入</a>
+                <a href="member.php">會員中心</a>
+                &nbsp;
+                <a href="buyBus.php">購物車</a>
+                <a href="index.php?logout=1">登出</a>
             </div>
 
         </div>
@@ -34,7 +56,7 @@
 
     <!-- 關於會員 -->
     <div id="memberOnly">
-        <h1>Hello User !!!</h1>
+        <h1>Hello <?= $row["userName"] ?> !!!</h1>
         <div id="change">
             <a href="">修改資料</a>
         </div>
