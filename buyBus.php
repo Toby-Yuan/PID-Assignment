@@ -70,10 +70,10 @@ if(isset($_POST["cancel"])){
 
             <!--  本頁面各連結 -->
             <div id="link">
-                <a href="#">三點半</a>
-                <a href="#about">關於我們</a>
+                <a href="index.php">三點半</a>
+                <a href="index.php#about">關於我們</a>
                 <a href="product.php">熱門商品</a>
-                <a href="#contact">聯絡我們</a>
+                <a href="index.php#contact">聯絡我們</a>
             </div>
             <div></div>
             <div id="member">

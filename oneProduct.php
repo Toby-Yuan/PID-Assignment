@@ -45,9 +45,9 @@ if(isset($_POST["submit"])){
             <!--  本頁面各連結 -->
             <div id="link">
                 <a href="index.php">三點半</a>
-                <a href="index.php">關於我們</a>
-                <a href="index.php">熱門商品</a>
-                <a href="index.php">聯絡我們</a>
+                <a href="index.php#about">關於我們</a>
+                <a href="product.php">熱門商品</a>
+                <a href="index.php#contact">聯絡我們</a>
             </div>
             <div></div>
             <div id="member">

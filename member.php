@@ -64,7 +64,7 @@ if(!isset($_SESSION["uid"])){
     <div id="memberOnly">
         <h1>Hello <?= $row["userName"] ?> !!!</h1>
         <div id="change">
-            <a href="">修改資料</a>
+            <a href="update.php">修改資料</a>
         </div>
     </div>
 
