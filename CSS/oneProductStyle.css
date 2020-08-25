@@ -52,37 +52,6 @@ nav #box #member {
   background-position: center;
 }
 
-#product {
-  width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
-  grid-gap: 30px;
-  margin-top: 40px;
-  text-align: center;
-}
-
-#product div {
-  text-decoration: none;
-  color: black;
-}
-
-#product div .image {
-  width: 100%;
-  height: 250px;
-  background-position: center;
-  background-size: cover;
-}
-
-#product div p {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 24px;
-}
-
 footer {
   width: 100%;
   background: #d33569;
@@ -104,4 +73,4 @@ footer #contact {
 footer #contact #logo {
   text-align: right;
 }
-/*# sourceMappingURL=productStyle.css.map */
+/*# sourceMappingURL=oneProductStyle.css.map */
