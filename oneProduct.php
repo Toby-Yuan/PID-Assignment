@@ -24,6 +24,30 @@ if(isset($_POST["submit"])){
     array_push($_SESSION["productNeed"], $arrayNeed);
 };
 
+if($_POST["submit1"]){
+
+    $userName = $_POST["userName"];
+    $userPassword = $_POST["userPassword"];
+
+    if(isset($userName)){
+        $search = <<<searchIt
+        SELECT id, userName, userPassword
+        FROM member
+        WHERE userName = '$userName';
+        searchIt;
+        $result = mysqli_query($link, $search);
+        $row = mysqli_fetch_assoc($result);
+        $passwordCheck = $row["userPassword"];
+
+        if($userPassword == $passwordCheck){
+            $_SESSION["uid"] = $row["id"];
+            header("location: index.php");
+            exit();
+        }
+    }
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +94,7 @@ if(isset($_POST["submit"])){
     <!-- 產品介紹 -->
     <div id="product">
         <div id="image" style="background-image: url(CSS/product<?= $row["id"] ?>.jpg)"></div>
-        <form action="" method="post">
+        <form action="" method="post" id="choose">
             <h1><?= $row["productName"] ?></h1>
             <h2>定價: <?= $row["price"] ?></h2>
 
@@ -85,6 +109,24 @@ if(isset($_POST["submit"])){
     </div>
 
     <!-- 測試 -->
+
+    <!-- 登入區塊 -->
+    <div id="login">
+        <div id="loginInput">
+            <div id="image"></div>
+            <div id="text">
+                <form action="" method="POST" id="loginForm">
+                    <label for="userName">帳號</label>
+                    <input type="text" name="userName" id="userName">
+                    <label for="userPassword">密碼</label>
+                    <input type="text" name="userPassword" id="userPassword">
+                    <input type="submit" value="送出" id="submit" name="submit1">
+                    <a href="create.php">會員註冊</a>
+                </form>
+                <button id="close">X</button>
+            </div>
+        </div>
+    </div>
     
 
     <!-- 聯絡我們 -->
@@ -117,6 +159,18 @@ if(isset($_POST["submit"])){
                     need--;
                     $("#need").val(need);
                 }
+            });
+
+            $("#login").hide();
+
+            $("#member").on("click", function(){
+                $("#login").show();
+            });
+
+            $("#close").on("click", function(){
+                $("#userName").val("");
+                $("#userPassword").val("");
+                $("#login").hide();
             });
         });
     </script>
