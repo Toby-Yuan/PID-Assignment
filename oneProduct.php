@@ -1,3 +1,21 @@
+<?php
+
+session_start();
+require_once("connect.php");
+
+if(!isset($_GET["productId"])){
+    header("location: product.php");
+    exit();
+}else{
+    $productId = $_GET["productId"];
+
+    $search = "SELECT * FROM `product` WHERE id = $productId";
+    $result = mysqli_query($link, $search);
+    $row = mysqli_fetch_assoc($result);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -23,7 +41,14 @@
             </div>
             <div></div>
             <div id="member">
-                <a href="">登入</a>
+                <?php if(isset($_SESSION["uid"])) { ?>
+                    <a href="member.php">會員中心</a>
+                    &nbsp;
+                    <a href="buyBus.php">購物車</a>
+                    <a href="index.php?logout=1">登出</a>
+                <?php } else { ?>
+                    <a id="loginOpen">登入</a>
+                <?php } ?>
             </div>
 
         </div>
@@ -34,10 +59,10 @@
 
     <!-- 產品介紹 -->
     <div id="product">
-        <div id="image" style="background-image: url(CSS/product1.jpg)"></div>
+        <div id="image" style="background-image: url(CSS/product<?= $row["id"] ?>.jpg)"></div>
         <form action="" method="post">
-            <h1>田園風光</h1>
-            <h2>定價: <span>220</span></h2>
+            <h1><?= $row["productName"] ?></h1>
+            <h2>定價: <?= $row["price"] ?></h2>
 
             <div id="select">
                 <div class="btn" id="cut">-</div>
