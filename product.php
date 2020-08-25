@@ -54,7 +54,7 @@ $result = mysqli_query($link, $searchAll);
     <!-- 產品 -->
         <div id="product">
             <?php while( $row = mysqli_fetch_assoc($result) ) { ?>
-                <a href="">
+                <a href="member.php?productId=<?= $row["id"] ?>">
                     <div>
                         <div class="image" style="background-image: url(CSS/product<?= $row["id"] ?>.jpg)"></div>
                         <p><?= $row["productName"] ?></p>
