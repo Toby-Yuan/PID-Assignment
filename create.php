@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once("connect.php");
 if(isset($_POST["submit"])){
     
@@ -23,6 +24,30 @@ if(isset($_POST["submit"])){
     }
     
 };
+
+if($_POST["submit1"]){
+
+    $userName = $_POST["userName"];
+    $userPassword = $_POST["userPassword"];
+
+    if(isset($userName)){
+        $search = <<<searchIt
+        SELECT id, userName, userPassword
+        FROM member
+        WHERE userName = '$userName';
+        searchIt;
+        $result = mysqli_query($link, $search);
+        $row = mysqli_fetch_assoc($result);
+        $passwordCheck = $row["userPassword"];
+
+        if($userPassword == $passwordCheck){
+            $_SESSION["uid"] = $row["id"];
+            header("location: index.php");
+            exit();
+        }
+    }
+
+}
 
 ?>
 
@@ -51,7 +76,14 @@ if(isset($_POST["submit"])){
             </div>
             <div></div>
             <div id="member">
-                <a id="loginOpen">登入</a>
+                <?php if(isset($_SESSION["uid"])) { ?>
+                    <a href="member.php">會員中心</a>
+                    &nbsp;
+                    <a href="buyBus.php">購物車</a>
+                    <a href="index.php?logout=1">登出</a>
+                <?php } else { ?>
+                    <a id="loginOpen">登入</a>
+                <?php } ?>
             </div>
 
         </div>
@@ -62,7 +94,7 @@ if(isset($_POST["submit"])){
 
     <!-- 創建表格 -->
     <div id="formTitle">註冊會員</div>
-    <form action="" method="post">
+    <form action="" method="post" id="create">
         <label for="newName">帳號</label>
         <input type="text" name="newName" id="newName" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required>
         <label for="newPassword">密碼</label>
@@ -85,6 +117,25 @@ if(isset($_POST["submit"])){
         </div>
     </form>
 
+    <!-- 登入區塊 -->
+    <div id="login">
+        <div id="loginInput">
+            <div id="image"></div>
+            <div id="text">
+                <form action="" method="POST" id="loginForm">
+                    <label for="userName">帳號</label>
+                    <input type="text" name="userName" id="userName">
+                    <label for="userPassword">密碼</label>
+                    <input type="text" name="userPassword" id="userPassword">
+                    <input type="submit" value="送出" id="submit" name="submit1">
+                    <a href="create.php">會員註冊</a>
+                </form>
+                <button id="close">X</button>
+                <!-- <div id="close"></div> -->
+            </div>
+        </div>
+    </div>
+
     <!-- 聯絡我們 -->
     <footer>
         <div id="contact">
@@ -102,6 +153,19 @@ if(isset($_POST["submit"])){
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        $(document).ready(function (){
+            $("#login").hide();
+
+            $("#member").on("click", function(){
+                $("#login").show();
+            });
+
+            $("#close").on("click", function(){
+                $("#userName").val("");
+                $("#userPassword").val("");
+                $("#login").hide();
+            });
+        });
     </script>
 </body>
 </html>
