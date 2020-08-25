@@ -122,7 +122,7 @@ if(isset($_GET["logout"])){
                     <input type="submit" value="送出" id="submit" name="submit">
                     <a href="create.php">會員註冊</a>
                 </form>
-                <div id="close"></div>
+                <button id="close">X</button>
             </div>
         </div>
     </div>
