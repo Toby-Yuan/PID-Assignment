@@ -38,9 +38,9 @@
         <label for="newName">帳號</label>
         <input type="text" name="newName" id="newName" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required>
         <label for="newPassword">密碼</label>
-        <input type="text" name="newPassword" id="newPassword" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required>
+        <input type="password" name="newPassword" id="newPassword" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required>
         <label for="newPasswordCheck">再輸入密碼</label>
-        <input type="text" name="newPasswordCheck" id="newPasswordCheck">
+        <input type="password" name="newPasswordCheck" id="newPasswordCheck">
         <label for="truthName">本名</label>
         <input type="text" name="truthName" id="truthName" required>
         <label for="phone">電話</label>
@@ -50,7 +50,7 @@
         <label for="address">地址</label>
         <input type="text" name="address" id="address" required>
         
-        <input type="checkbox" name="check" id="check">
+        <input type="checkbox" name="check" id="check" value="1">
         <label for="check">我同意本平台的使用者規範</label>
 
         <div id="btnGroup">
