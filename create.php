@@ -1,3 +1,31 @@
+<?php
+
+require_once("connect.php");
+if(isset($_POST["submit"])){
+    
+    if(isset($_POST["check"])){
+        $userName = $_POST["newName"];
+        $userPassword = $_POST["newPassword"];
+        $truthName = $_POST["truthName"];
+        $phone = $_POST["phone"];
+        $email = $_POST["email"];
+        $address = $_POST["address"];
+    
+    
+        $addMember = <<<createIn
+        INSERT INTO `member`(`userName`, `userPassword`, `truthName`, `email`, `phone`, `userAddress`) 
+        VALUES ('$userName','$userPassword','$truthName','$email','$phone','$address');
+        createIn;
+        $result = mysqli_query($link, $addMember);
+    
+        header("location: index.php");
+        exit();
+    }
+    
+};
+
+?>
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -39,8 +67,6 @@
         <input type="text" name="newName" id="newName" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required>
         <label for="newPassword">密碼</label>
         <input type="password" name="newPassword" id="newPassword" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required>
-        <label for="newPasswordCheck">再輸入密碼</label>
-        <input type="password" name="newPasswordCheck" id="newPasswordCheck">
         <label for="truthName">本名</label>
         <input type="text" name="truthName" id="truthName" required>
         <label for="phone">電話</label>
@@ -54,7 +80,7 @@
         <label for="check">我同意本平台的使用者規範</label>
 
         <div id="btnGroup">
-            <input type="submit" value="確認" class="button">
+            <input type="submit" value="確認" class="button" name="submit">
             <input type="reset" value="重設" class="button">
         </div>
     </form>
