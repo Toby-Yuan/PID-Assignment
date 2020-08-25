@@ -40,6 +40,12 @@ if(isset($_POST["submit"])){
     
 }
 
+if(isset($_POST["cancel"])){
+    unset($_SESSION["productNeed"]);
+    header("location: index.php");
+    exit();
+}
+
 
 ?>
 
