@@ -14,6 +14,11 @@ if(!isset($_GET["productId"])){
     $row = mysqli_fetch_assoc($result);
 }
 
+if(isset($_POST["submit"])){
+    $arrayNeed[$productId] = $_POST["need"];
+    array_push($_SESSION["productNeed"], $arrayNeed);
+};
+
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +75,7 @@ if(!isset($_GET["productId"])){
                 <div class="btn" id="sub">+</div>
             </div>
 
-            <input type="submit" value="送出">
+            <input type="submit" value="送出" name="submit">
         </form>
     </div>
 
