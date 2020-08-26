@@ -65,7 +65,15 @@ if(!isset($_SESSION["mid"])){
                         <?php } ?>
                     </td>
                 </tr>
-            <?php } ?>
+            <?php 
+                if(isset($_POST["$set"])){
+                    $memberId = $member["id"];
+                    $updateBlack = "UPDATE member SET black = 1 WHERE id = $memberId";
+                    mysqli_query($link, $updateBlack);
+                    header("location: masterMember.php");
+                }
+                } 
+            ?>
             
             <!-- <tr>
                 <td>1 <input type="text" name="id" id="id" value="1"></td>
