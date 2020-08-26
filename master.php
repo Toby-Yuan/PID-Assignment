@@ -14,6 +14,7 @@ if(!isset($_SESSION["mid"])){
 }
 
 $searchPro = "SELECT * FROM product";
+$resultPro = mysqli_query($link, $searchPro);
 
 ?>
 
@@ -49,7 +50,22 @@ $searchPro = "SELECT * FROM product";
                 <th>修改／刪除</th>
             </tr>
 
-            <tr>
+            <?php while($product = mysqli_fetch_assoc($resultPro)) { ?>
+
+                <tr>
+                    <td><?= $product["id"] ?> <input type="text" name="<?= "id".$product["id"] ?>" value="<?= $product["id"] ?>" class="id"></td>
+                    <td class="imgIn"><div class="imgBg" style="background-image: url(CSS/product<?= $product["id"] ?>.jpg)"></div></td>
+                    <td><input type="text" name="product" value="<?= $product["productName"] ?>"></td>
+                    <td><input type="text" name="price" value="<?= $product["price"] ?>"></td>
+                    <td style="width: 200px">
+                        <input type="button" value="修改" name="<?= "update".$product["id"] ?>">
+                        <input type="button" value="刪除" name="<?= "delete".$product["id"] ?>">
+                    </td>
+                </tr>
+
+            <?php } ?>
+
+            <!-- <tr>
                 <td>1 <input type="text" name="id" value="1" class="id"></td>
                 <td class="imgIn"><div class="imgBg" style="background-image: url(CSS/product1.jpg)"></div></td>
                 <td><input type="text" name="product" value="田園風光"></td>
@@ -58,7 +74,7 @@ $searchPro = "SELECT * FROM product";
                     <input type="button" value="修改">
                     <input type="button" value="刪除">
                 </td>
-            </tr>
+            </tr> -->
         </table>
     </form>
 
