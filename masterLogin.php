@@ -1,3 +1,24 @@
+<?php
+
+session_start();
+require_once("connect.php");
+
+if(isset($_POST["submit"])){
+    $userName = $_POST["masterName"];
+    $userPassword = $_POST["masterPassword"];
+    $search = "SELECT * FROM webMaster WHERE userName = '$userName'";
+    $result = mysqli_query($link, $search);
+    $row = mysqli_fetch_assoc($result);
+
+    if($userPassword = $row["userPassword"]){
+        $_SESSION["mid"] = $row["id"];
+        header("location: master.php");
+        exit();
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -21,7 +42,7 @@
                 <td><input type="password" name="masterPassword" id="masterPassword" required></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="登入"></td>
+                <td colspan="2"><input type="submit" value="登入" name="submit"></td>
             </tr>
         </table>
     </form>
