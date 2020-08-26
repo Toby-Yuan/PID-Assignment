@@ -11,6 +11,8 @@ if(!isset($_SESSION["mid"])){
     $searchSession = "SELECT userName, grade FROM webMaster WHERE id = $mid";
     $result = mysqli_query($link, $searchSession);
     $master = mysqli_fetch_assoc($result);
+    $serachMem = "SELECT * FROM member";
+    $memberList = mysqli_query($link, $serachMem);
 }
 
 ?>
@@ -47,15 +49,34 @@ if(!isset($_SESSION["mid"])){
                 <th>黑名單</th>
             </tr>
 
-            <tr>
+            <?php while($member = mysqli_fetch_assoc($memberList)) { ?>
+                <tr>
+                    <td><?= $member["id"] ?> <input type="text" name="<?= "id" . $member["id"] ?>" id="id" value="<?= $member["id"] ?>"></td>
+                    <td><?= $member["userName"] ?></td>
+                    <td><?= $member["email"] ?></td>
+                    <td><?= $member["phone"] ?></td>
+                    <td style="width: 200px">
+                        <?php if(!isset($member["black"])){ ?>
+                        <span>X</span>
+                        <input type="submit" value="設立" name="<?php $set = "set".$member["id"]; echo $set; ?>">
+                        <?php }else{ ?>
+                        <span>O</span>
+                        <input type="submit" value="取消" name="<?php $cancel = "cancel".$member["id"]; echo $cancel; ?>">
+                        <?php } ?>
+                    </td>
+                </tr>
+            <?php } ?>
+            
+            <!-- <tr>
                 <td>1 <input type="text" name="id" id="id" value="1"></td>
                 <td>Dent0204</td>
                 <td>abc@mail.com</td>
                 <td>0912345678</td>
                 <td style="width: 200px">
-                    <input type="button" value="設立">
+                    <span>X</span>
+                    <input type="submit" value="設立">
                 </td>
-            </tr>
+            </tr> -->
         </table>
     </form>
     

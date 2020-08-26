@@ -62,7 +62,7 @@ nav #box a {
   border: none;
 }
 
-#allProduct input[type="button"] {
+#allProduct input[type="submit"] {
   width: 60px;
   padding: 5px;
 }
