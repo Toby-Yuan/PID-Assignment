@@ -15,7 +15,6 @@ if(!isset($_SESSION["mid"])){
 
 $searchPro = "SELECT * FROM product";
 $resultPro = mysqli_query($link, $searchPro);
-
 ?>
 
 <!DOCTYPE html>
@@ -50,20 +49,35 @@ $resultPro = mysqli_query($link, $searchPro);
                 <th>修改／刪除</th>
             </tr>
 
-            <?php while($product = mysqli_fetch_assoc($resultPro)) { ?>
+            <?php   
+                while($product = mysqli_fetch_assoc($resultPro)) { 
+                    $productId = $product["id"];
+            ?>
 
                 <tr>
                     <td><?= $product["id"] ?> <input type="text" name="<?= "id".$product["id"] ?>" value="<?= $product["id"] ?>" class="id"></td>
                     <td class="imgIn"><div class="imgBg" style="background-image: url(CSS/product<?= $product["id"] ?>.jpg)"></div></td>
-                    <td><input type="text" name="product" value="<?= $product["productName"] ?>"></td>
-                    <td><input type="text" name="price" value="<?= $product["price"] ?>"></td>
+                    <td><input type="text" name="<?= "product".$product["id"] ?>" value="<?= $product["productName"] ?>"></td>
+                    <td><input type="text" name="<?= "price".$product["id"] ?>" value="<?= $product["price"] ?>"></td>
                     <td style="width: 200px">
-                        <input type="button" value="修改" name="<?= "update".$product["id"] ?>">
-                        <input type="button" value="刪除" name="<?= "delete".$product["id"] ?>">
+                        <input type="submit" value="修改" name="<?php $update = "update".$product["id"]; echo $update; ?>">
+                        <input type="submit" value="刪除" name="<?= "delete".$product["id"] ?>">
                     </td>
                 </tr>
 
-            <?php } ?>
+            <?php 
+                if(isset($_POST["$update"])){
+                    $productName = $_POST["product$productId"];
+                    $price = $_POST["price$productId"];
+                    $updateIt = <<<updateit
+                    UPDATE product SET productName = '$productName', price = $price
+                    WHERE id = $productId
+                    updateit;
+                    mysqli_query($link, $updateIt);
+                }
+
+                } 
+            ?>
 
             <!-- <tr>
                 <td>1 <input type="text" name="id" value="1" class="id"></td>
@@ -78,7 +92,7 @@ $resultPro = mysqli_query($link, $searchPro);
         </table>
     </form>
 
-    <form action="" method="post" id="allProduct">
+    <form action="" method="post">
         <table>
             <tr>
                 <td colspan="3" id="tableName">新增商品</td>
@@ -93,7 +107,7 @@ $resultPro = mysqli_query($link, $searchPro);
                 <td><input type="text" name="newProduct"></td>
                 <td><input type="text" name="newPrice"></td>
                 <td style="width: 200px">
-                    <input type="button" value="新增">
+                    <input type="button" value="新增" name="new">
                 </td>
             </tr>
         </table>
