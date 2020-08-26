@@ -11,10 +11,10 @@ if(!isset($_SESSION["mid"])){
     $searchSession = "SELECT userName, grade FROM webMaster WHERE id = $mid";
     $result = mysqli_query($link, $searchSession);
     $master = mysqli_fetch_assoc($result);
+    $searchPro = "SELECT * FROM product";
+    $resultPro = mysqli_query($link, $searchPro);
 }
 
-$searchPro = "SELECT * FROM product";
-$resultPro = mysqli_query($link, $searchPro);
 
 if(isset($_POST["new"])){
     $newProduct = $_POST["newProduct"];
@@ -70,7 +70,7 @@ if(isset($_POST["new"])){
                     <td><input type="text" name="<?= "price".$product["id"] ?>" value="<?= $product["price"] ?>"></td>
                     <td style="width: 200px">
                         <input type="submit" value="修改" name="<?php $update = "update".$product["id"]; echo $update; ?>">
-                        <input type="submit" value="刪除" name="<?= "delete".$product["id"] ?>">
+                        <input type="submit" value="刪除" name="<?php $delete = "delete".$product["id"]; echo $delete; ?>">
                     </td>
                 </tr>
 
@@ -83,6 +83,13 @@ if(isset($_POST["new"])){
                     WHERE id = $productId
                     updateit;
                     mysqli_query($link, $updateIt);
+                    header("location: master.php");
+                }
+
+                if(isset($_POST["$delete"])){
+                    $deleteIt = "DELETE FROM product WHERE id = $productId";
+                    mysqli_query($link, $deleteIt);
+                    header("location: master.php");
                 }
 
                 } 
