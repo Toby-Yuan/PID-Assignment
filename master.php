@@ -38,9 +38,9 @@ if(isset($_POST["new"])){
     <nav>
         <div id="box">
             <h4>管理員: <?= $master["userName"] ?></h4>
-            <a href="">商品列表</a>
-            <a href="">會員列表</a>
-            <a href="">訂單管理</a>
+            <a href="#">商品列表</a>
+            <a href="masterMember.php">會員列表</a>
+            <a href="masterOrder.php">訂單管理</a>
             <div></div>
         </div>
     </nav>
