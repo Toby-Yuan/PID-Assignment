@@ -1,3 +1,20 @@
+<?php
+
+session_start();
+require_once("connect.php");
+
+if(!isset($_SESSION["mid"])){
+    header("location: index.php");
+    exit();
+}else{
+    $mid = $_SESSION["mid"];
+    $searchSession = "SELECT userName, grade FROM webMaster WHERE id = $mid";
+    $result = mysqli_query($link, $searchSession);
+    $master = mysqli_fetch_assoc($result);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -9,7 +26,7 @@
 <body>
     <nav>
         <div id="box">
-            <h4>管理員: Dent0204</h4>
+            <h4>管理員: <?= $master["userName"] ?></h4>
             <a href="">商品列表</a>
             <a href="">會員列表</a>
             <a href="">訂單管理</a>
