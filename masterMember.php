@@ -20,22 +20,23 @@
     <form action="" method="post" id="allProduct">
         <table>
             <tr>
-                <td colspan="4" id="tableName">商品列表</td>
+                <td colspan="5" id="tableName">會員列表</td>
             </tr>
             <tr>
                 <th>編號</th>
-                <th>品名</th>
-                <th>定價</th>
-                <th>修改／刪除</th>
+                <th>會員帳號</th>
+                <th>電子信箱</th>
+                <th>聯絡電話</th>
+                <th>黑名單</th>
             </tr>
 
             <tr>
                 <td>1 <input type="text" name="id" id="id" value="1"></td>
-                <td><input type="text" name="product" value="田園風光"></td>
-                <td><input type="text" name="price" value="220"></td>
+                <td>Dent0204</td>
+                <td>abc@mail.com</td>
+                <td>0912345678</td>
                 <td style="width: 200px">
-                    <input type="button" value="修改">
-                    <input type="button" value="刪除">
+                    <input type="button" value="設立">
                 </td>
             </tr>
         </table>
