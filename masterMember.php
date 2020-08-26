@@ -69,7 +69,10 @@ if(!isset($_SESSION["mid"])){
                 if(isset($_POST["$set"])){
                     $memberId = $member["id"];
                     $updateBlack = "UPDATE member SET black = 1 WHERE id = $memberId";
-                    mysqli_query($link, $updateBlack);
+                    
+                    if($master["grade"] < 2){
+                        mysqli_query($link, $updateBlack);
+                    }
                     header("location: masterMember.php");
                 }
                 } 
