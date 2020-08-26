@@ -13,6 +13,8 @@ if(!isset($_SESSION["mid"])){
     $master = mysqli_fetch_assoc($result);
 }
 
+$searchPro = "SELECT * FROM product";
+
 ?>
 
 <!DOCTYPE html>
@@ -37,17 +39,19 @@ if(!isset($_SESSION["mid"])){
     <form action="" method="post" id="allProduct">
         <table>
             <tr>
-                <td colspan="4" id="tableName">商品列表</td>
+                <td colspan="5" id="tableName">商品列表</td>
             </tr>
             <tr>
                 <th>編號</th>
+                <th>照片</th>
                 <th>品名</th>
                 <th>定價</th>
                 <th>修改／刪除</th>
             </tr>
 
             <tr>
-                <td>1 <input type="text" name="id" id="id" value="1"></td>
+                <td>1 <input type="text" name="id" value="1" class="id"></td>
+                <td class="imgIn"><div class="imgBg" style="background-image: url(CSS/product1.jpg)"></div></td>
                 <td><input type="text" name="product" value="田園風光"></td>
                 <td><input type="text" name="price" value="220"></td>
                 <td style="width: 200px">
