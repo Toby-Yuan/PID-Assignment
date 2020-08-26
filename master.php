@@ -16,6 +16,30 @@
             <div></div>
         </div>
     </nav>
+
+    <form action="" method="post" id="allProduct">
+        <table>
+            <tr>
+                <td colspan="4" id="tableName">商品列表</td>
+            </tr>
+            <tr>
+                <th>編號</th>
+                <th>品名</th>
+                <th>定價</th>
+                <th>修改／刪除</th>
+            </tr>
+
+            <tr>
+                <td>1 <input type="text" name="id" id="id" value="1"></td>
+                <td><input type="text" name="product" value="田園風光"></td>
+                <td><input type="text" name="price" value="220"></td>
+                <td style="width: 200px">
+                    <input type="button" value="修改">
+                    <input type="button" value="刪除">
+                </td>
+            </tr>
+        </table>
+    </form>
     
 </body>
 </html>
