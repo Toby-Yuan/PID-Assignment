@@ -79,10 +79,17 @@ if(!isset($_SESSION["mid"])){
 
                     <td><?= (isset($order["delivery"])) ? "已送達" : "未配送" ?></td>
                     <td style="width: 200px">
-                        <input type="submit" value="送出" name="<?= "submit".$order["id"] ?>">
+                        <input type="submit" value="送出" name="<?php $submit = "submit".$order["id"]; echo $submit; ?>">
                     </td>
                 </tr>
-            <?php } ?>
+            <?php 
+                if(isset($_POST["$submit"])){
+                    $updateOrder = "UPDATE memberOrder SET delivery = 1 WHERE id = $orderId";
+                    mysqli_query($link, $updateOrder);
+                    header("location: masterOrder.php");
+                }
+                } 
+            ?>
 
             <!-- <tr>
                 <td>1 <input type="text" name="id" id="id" value="1"></td>
