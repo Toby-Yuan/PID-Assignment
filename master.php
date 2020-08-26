@@ -88,7 +88,9 @@ if(isset($_POST["new"])){
 
                 if(isset($_POST["$delete"])){
                     $deleteIt = "DELETE FROM product WHERE id = $productId";
-                    mysqli_query($link, $deleteIt);
+                    if($master["grade"] < 3){
+                        mysqli_query($link, $deleteIt);
+                    }
                     header("location: master.php");
                 }
 
