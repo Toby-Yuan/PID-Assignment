@@ -15,6 +15,15 @@ if(!isset($_SESSION["mid"])){
 
 $searchPro = "SELECT * FROM product";
 $resultPro = mysqli_query($link, $searchPro);
+
+if(isset($_POST["new"])){
+    $newProduct = $_POST["newProduct"];
+    $newPrice = $_POST["newPrice"];
+    $create = "INSERT INTO product (productName, price) VALUES ('$newProduct', $newPrice)";
+    mysqli_query($link, $create);
+    header("location: master.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -107,7 +116,7 @@ $resultPro = mysqli_query($link, $searchPro);
                 <td><input type="text" name="newProduct"></td>
                 <td><input type="text" name="newPrice"></td>
                 <td style="width: 200px">
-                    <input type="button" value="新增" name="new">
+                    <input type="submit" value="新增" name="new">
                 </td>
             </tr>
         </table>
