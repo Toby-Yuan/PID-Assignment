@@ -11,6 +11,12 @@ if(!isset($_SESSION["mid"])){
     $searchSession = "SELECT userName, grade FROM webMaster WHERE id = $mid";
     $result = mysqli_query($link, $searchSession);
     $master = mysqli_fetch_assoc($result);
+    $searchOrder = <<<searchorder
+    SELECT mo.id, orderDate, delivery, userName  FROM memberOrder mo 
+    JOIN member m ON m.id = mo.memberId
+    ORDER BY orderDate;
+    searchorder;
+    $orderList = mysqli_query($link, $searchOrder);
 }
 
 ?>
@@ -48,7 +54,37 @@ if(!isset($_SESSION["mid"])){
                 <th>送達</th>
             </tr>
 
-            <tr>
+            <?php while($order = mysqli_fetch_assoc($orderList)) { ?>
+                <tr>
+                    <td><?= $order["id"] ?> <input type="text" name="<?= "name".$order["id"] ?>" id="id" value="<?= $order["id"] ?>"></td>
+                    <td><?= $order["orderDate"] ?></td>
+                    <td><?= $order["userName"] ?></td>
+
+                    <?php
+                        $orderId = $order["id"];
+                        $searchOD = <<<searchod
+                        SELECT productName, demand
+                        FROM orderDetail od
+                        JOIN product p ON p.id = od.productId
+                        WHERE orderId = $orderId;
+                        searchod;
+                        $resultOD = mysqli_query($link, $searchOD);
+                    ?>
+                    <td>
+                        <?php while($od = mysqli_fetch_assoc($resultOD)) { ?>
+                            <p><?= $od["productName"] . "X" . $od["demand"] ?></p><br>
+                        <?php } ?>
+                    </td>
+
+
+                    <td><?= (isset($order["delivery"])) ? "已送達" : "未配送" ?></td>
+                    <td style="width: 200px">
+                        <input type="submit" value="送出" name="<?= "submit".$order["id"] ?>">
+                    </td>
+                </tr>
+            <?php } ?>
+
+            <!-- <tr>
                 <td>1 <input type="text" name="id" id="id" value="1"></td>
                 <td>2020-08-27</td>
                 <td>Dent0204</td>
@@ -57,7 +93,7 @@ if(!isset($_SESSION["mid"])){
                 <td style="width: 200px">
                     <input type="button" value="送出">
                 </td>
-            </tr>
+            </tr> -->
         </table>
     </form>
     
