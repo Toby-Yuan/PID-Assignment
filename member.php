@@ -15,7 +15,7 @@ if(!isset($_SESSION["uid"])){
     $row = mysqli_fetch_assoc($result);
 
     $searchOrder = <<<searchorder
-    SELECT id, orderDate FROM memberOrder 
+    SELECT id, orderDate, orderTime FROM memberOrder 
     WHERE memberId = $uid ORDER BY orderDate;
     searchorder;
     $memberOrder = mysqli_query($link, $searchOrder);
@@ -94,7 +94,8 @@ if(!isset($_SESSION["uid"])){
     ?>
 
     <div class="history">
-        <h3>日期: <span><?= $oDate ?></span></h3>
+        <h3>訂購日期: <span><?= $order["orderTime"] ?></span></h3>
+        <h3>送達日期: <span><?= $oDate ?></span></h3>
         <p>
         <?php while($detail = mysqli_fetch_assoc($thisOrderDetail)) { ?>
             <span><?= $detail["productName"] ?></span> x <span><?= $detail["demand"] ?></span> <br>
