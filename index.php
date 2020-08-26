@@ -10,7 +10,7 @@ if($_POST["submit"]){
 
     if(isset($userName)){
         $search = <<<searchIt
-        SELECT id, userName, userPassword
+        SELECT id, userName, userPassword, black
         FROM member
         WHERE userName = '$userName';
         searchIt;
@@ -18,7 +18,7 @@ if($_POST["submit"]){
         $row = mysqli_fetch_assoc($result);
         $passwordCheck = $row["userPassword"];
 
-        if($userPassword == $passwordCheck){
+        if(($userPassword == $passwordCheck) && ($row["black"] != 1)){
             $_SESSION["uid"] = $row["id"];
         }
     }
