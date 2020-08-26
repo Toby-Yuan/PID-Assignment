@@ -40,6 +40,27 @@
             </tr>
         </table>
     </form>
+
+    <form action="" method="post" id="allProduct">
+        <table>
+            <tr>
+                <td colspan="3" id="tableName">新增商品</td>
+            </tr>
+            <tr>
+                <th>品名</th>
+                <th>定價</th>
+                <th>確認</th>
+            </tr>
+
+            <tr>
+                <td><input type="text" name="newProduct"></td>
+                <td><input type="text" name="newPrice"></td>
+                <td style="width: 200px">
+                    <input type="button" value="新增">
+                </td>
+            </tr>
+        </table>
+    </form>
     
 </body>
 </html>

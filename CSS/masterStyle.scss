@@ -32,7 +32,7 @@ nav{
     }
 }
 
-#allProduct{
+form{
     @include box();
     margin-top: 40px;
 
@@ -58,6 +58,7 @@ nav{
     input[type="text"]{
         width: 100%;
         border: none;
+        height: 30px;
     }
 
     input[type="button"]{
