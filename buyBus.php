@@ -8,13 +8,14 @@ $memberId = $_SESSION["uid"];
 
 if(isset($_POST["submit"])){
     $nowtime = $_POST["time"];
+    $orderTime = date("Y年m月d日 H:i:s");
     $addOrder = <<<addorder
-    INSERT INTO memberOrder (memberId, orderDate)
-    VALUES ($memberId, '$nowtime');
+    INSERT INTO memberOrder (memberId, orderDate, orderTime)
+    VALUES ($memberId, '$nowtime', '$orderTime');
     addorder;
     mysqli_query($link, $addOrder);
 
-    $searchOrder = "SELECT id FROM memberOrder WHERE orderDate = '$nowtime' AND memberId = $memberId";
+    $searchOrder = "SELECT id FROM memberOrder WHERE orderTime = '$orderTime' AND memberId = $memberId";
     $result = mysqli_query($link, $searchOrder);
     $thisOrder = mysqli_fetch_assoc($result);
     $thisId = $thisOrder["id"];
