@@ -229,8 +229,6 @@ if(isset($_POST["choose"])){
     </table>
     
     <h1>總營收: <?= $income ?></h1>
-    
-    <img src="image.php" style="border:1px #000 solid;" />
 
 </body>
 </html>
