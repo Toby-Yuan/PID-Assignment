@@ -19,8 +19,24 @@ if(!isset($_SESSION["mid"])){
 if(isset($_POST["new"])){
     $newProduct = $_POST["newProduct"];
     $newPrice = $_POST["newPrice"];
-    $create = "INSERT INTO product (productName, price) VALUES ('$newProduct', $newPrice)";
-    mysqli_query($link, $create);
+
+    if(!empty($_FILES["image"]["name"])) { 
+        // Get file info 
+        $fileName = basename($_FILES["image"]["name"]); 
+        $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+         
+        // Allow certain file formats 
+        $allowTypes = array('jpg','png','jpeg','gif'); 
+        if(in_array($fileType, $allowTypes)){ 
+            $image = $_FILES['image']['tmp_name']; 
+            $imgContent = addslashes(file_get_contents($image)); 
+         
+            // Insert image content into database 
+            $create = "INSERT INTO product (productName, price, productImg) VALUES ('$newProduct', $newPrice,'$imgContent')";
+            mysqli_query($link, $create);
+        }
+    }
+
     header("location: master.php");
     exit();
 }
@@ -65,7 +81,7 @@ if(isset($_POST["new"])){
 
                 <tr>
                     <td><?= $product["id"] ?> <input type="text" name="<?= "id".$product["id"] ?>" value="<?= $product["id"] ?>" class="id"></td>
-                    <td class="imgIn"><div class="imgBg" style="background-image: url(CSS/product<?= $product["id"] ?>.jpg)"></div></td>
+                    <td class="imgIn"><div class="imgBg" style="background-image: url(data:image/jpg;charset:utf8;base64,<?= base64_encode($product["productImg"]); ?>)"></div></td>
                     <td><input type="text" name="<?= "product".$product["id"] ?>" value="<?= $product["productName"] ?>"></td>
                     <td><input type="text" name="<?= "price".$product["id"] ?>" value="<?= $product["price"] ?>"></td>
                     <td style="width: 200px">
@@ -110,20 +126,22 @@ if(isset($_POST["new"])){
         </table>
     </form>
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <table>
             <tr>
-                <td colspan="3" id="tableName">新增商品</td>
+                <td colspan="4" id="tableName">新增商品</td>
             </tr>
             <tr>
                 <th>品名</th>
                 <th>定價</th>
+                <th>圖片</th>
                 <th>確認</th>
             </tr>
 
             <tr>
                 <td><input type="text" name="newProduct"></td>
                 <td><input type="text" name="newPrice"></td>
+                <td><input type="file" name="image"></td>
                 <td style="width: 200px">
                     <input type="submit" value="新增" name="new">
                 </td>
