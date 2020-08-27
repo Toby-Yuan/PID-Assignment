@@ -1,7 +1,0 @@
-SELECT p.id, productName, SUM(demand)
-FROM product p
-JOIN orderDetail od ON od.productId = p.id
-JOIN memberOrder mo ON od.orderId = mo.id
-WHERE DATEDIFF(NOW(), orderTime) < 7
-GROUP BY p.id, productName
-ORDER BY p.id
