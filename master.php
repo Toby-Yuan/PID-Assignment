@@ -64,13 +64,14 @@ if(isset($_POST["new"])){
     <form action="" method="post" id="allProduct">
         <table>
             <tr>
-                <td colspan="5" id="tableName">商品列表</td>
+                <td colspan="6" id="tableName">商品列表</td>
             </tr>
             <tr>
                 <th>編號</th>
                 <th>照片</th>
                 <th>品名</th>
                 <th>定價</th>
+                <th>庫存</th>
                 <th>修改／刪除</th>
             </tr>
 
@@ -84,6 +85,7 @@ if(isset($_POST["new"])){
                     <td class="imgIn"><div class="imgBg" style="background-image: url(data:image/jpg;charset:utf8;base64,<?= base64_encode($product["productImg"]); ?>)"></div></td>
                     <td><input type="text" name="<?= "product".$product["id"] ?>" value="<?= $product["productName"] ?>"></td>
                     <td><input type="text" name="<?= "price".$product["id"] ?>" value="<?= $product["price"] ?>"></td>
+                    <td><input type="text" name="<?= "stock".$product["id"] ?>" value="<?= $product["inStock"] ?>"></td>
                     <td style="width: 200px">
                         <input type="submit" value="修改" name="<?php $update = "update".$product["id"]; echo $update; ?>">
                         <input type="submit" value="刪除" name="<?php $delete = "delete".$product["id"]; echo $delete; ?>">
@@ -94,8 +96,9 @@ if(isset($_POST["new"])){
                 if(isset($_POST["$update"])){
                     $productName = $_POST["product$productId"];
                     $price = $_POST["price$productId"];
+                    $stock = $_POST["stock$productId"];
                     $updateIt = <<<updateit
-                    UPDATE product SET productName = '$productName', price = $price
+                    UPDATE product SET productName = '$productName', price = $price, inStock = $stock
                     WHERE id = $productId
                     updateit;
                     mysqli_query($link, $updateIt);
@@ -106,8 +109,8 @@ if(isset($_POST["new"])){
                     $deleteIt = "DELETE FROM product WHERE id = $productId";
                     if($master["grade"] < 3){
                         mysqli_query($link, $deleteIt);
+                        header("location: master.php");
                     }
-                    header("location: master.php");
                 }
 
                 } 

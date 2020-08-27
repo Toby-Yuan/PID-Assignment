@@ -8,7 +8,7 @@ $memberId = $_SESSION["uid"];
 
 if(isset($_POST["submit"])){
     $nowtime = $_POST["time"];
-    $orderTime = date("Y年m月d日 H:i:s");
+    $orderTime = date("Y-m-d H:i:s");
     $addOrder = <<<addorder
     INSERT INTO memberOrder (memberId, orderDate, orderTime)
     VALUES ($memberId, '$nowtime', '$orderTime');
