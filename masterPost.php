@@ -68,7 +68,7 @@ if(isset($_POST["choose"])){
     <nav>
         <div id="box">
             <h4>管理員: <?= $master["userName"] ?></h4>
-            <a href="index.php">商品列表</a>
+            <a href="master.php">商品列表</a>
             <a href="masterMember.php">會員列表</a>
             <a href="masterOrder.php">訂單管理</a>
             <a href="#">報表統計</a>
