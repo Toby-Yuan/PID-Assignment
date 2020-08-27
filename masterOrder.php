@@ -14,7 +14,7 @@ if(!isset($_SESSION["mid"])){
     $searchOrder = <<<searchorder
     SELECT mo.id, orderDate, orderTime, delivery, userName  FROM memberOrder mo 
     JOIN member m ON m.id = mo.memberId
-    ORDER BY orderDate DESC;
+    ORDER BY orderTime DESC;
     searchorder;
     $orderList = mysqli_query($link, $searchOrder);
 }
