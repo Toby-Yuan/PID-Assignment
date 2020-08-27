@@ -105,6 +105,7 @@ if(!isset($_SESSION["uid"])){
         <?php while($total = mysqli_fetch_assoc($thisOrderTotal)) { ?>
             <h3>Total: <span><?= $total["totalPrice"] ?></span></h3>
         <?php } ?>
+        <hr>
     </div>
 
     <?php } ?>
