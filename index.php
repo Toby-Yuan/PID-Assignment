@@ -7,6 +7,7 @@ if($_POST["submit"]){
 
     $userName = $_POST["userName"];
     $userPassword = $_POST["userPassword"];
+    $userPassword = sha1($userPassword);
 
     if(isset($userName)){
         $search = <<<searchIt
@@ -27,8 +28,6 @@ if($_POST["submit"]){
 
 if(isset($_GET["logout"])){
     unset($_SESSION["uid"]);
-    session_unset();
-    session_destroy();
     header("location: index.php");
     exit();
 }

@@ -10,6 +10,7 @@ if($_POST["submit"]){
 
     $userName = $_POST["userName"];
     $userPassword = $_POST["userPassword"];
+    $userPassword = sha1($userPassword);
 
     if(isset($userName)){
         $search = <<<searchIt

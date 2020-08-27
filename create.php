@@ -11,6 +11,8 @@ if(isset($_POST["submit"])){
         $phone = $_POST["phone"];
         $email = $_POST["email"];
         $address = $_POST["address"];
+
+        $userPassword = sha1($userPassword);
     
     
         $addMember = <<<createIn
@@ -29,6 +31,7 @@ if($_POST["submit1"]){
 
     $userName = $_POST["userName"];
     $userPassword = $_POST["userPassword"];
+    $userPassword = sha1($userPassword);
 
     if(isset($userName)){
         $search = <<<searchIt
