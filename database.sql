@@ -43,3 +43,12 @@ CREATE TABLE product(
 INSERT INTO product (productName, price) VALUES
 ('田園風采', 220), ('女巫們的宴會', 180), ('少女的酸甜', 250), ('梵谷的星空', 150),
 ('莓好世界', 200), ('小紅帽的竹籃', 180), ('觀察土星', 250), ('大吃莓一口', 120);
+
+-- 歷史資料
+CREATE TABLE oldProduct(
+    id int not null auto_increment primary key,
+    productId int not null,
+    productName varchar(10) not null,
+    price int not null,
+    changeTime varchar(20) not null
+);
