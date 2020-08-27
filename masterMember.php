@@ -32,6 +32,7 @@ if(!isset($_SESSION["mid"])){
             <a href="master.php">商品列表</a>
             <a href="#">會員列表</a>
             <a href="masterOrder.php">訂單管理</a>
+            <a href="masterPost.php">報表統計</a>
             <div></div>
         </div>
     </nav>

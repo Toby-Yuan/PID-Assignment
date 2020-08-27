@@ -57,6 +57,7 @@ if(isset($_POST["new"])){
             <a href="#">商品列表</a>
             <a href="masterMember.php">會員列表</a>
             <a href="masterOrder.php">訂單管理</a>
+            <a href="masterPort.php">報表統計</a>
             <div></div>
         </div>
     </nav>
