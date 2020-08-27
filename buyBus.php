@@ -38,8 +38,10 @@ if(isset($_POST["submit"])){
                 $rowPro = mysqli_fetch_assoc($resultPro);
                 $nowStock = $rowPro["inStock"] - $demand;
                 $updateProduct = <<<up
-                UPDATE TABLE product SET inStock where id = $productId;
+                UPDATE product SET inStock = $nowStock where id = $productId;
                 up;
+                // echo $updateProduct;
+                // exit();
                 // echo $addDetail;
                 // exit();
                 mysqli_query($link, $addDetail);
