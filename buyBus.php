@@ -30,9 +30,20 @@ if(isset($_POST["submit"])){
                 INSERT INTO orderDetail (orderId, productId, demand)
                 VALUES ($thisId, $productId, $demand);
                 adddetail;
+
+                $searchProduct = <<<sp
+                SELECT inStock FROM product WHERE id = $productId;
+                sp;
+                $resultPro = mysqli_query($link, $searchProduct);
+                $rowPro = mysqli_fetch_assoc($resultPro);
+                $nowStock = $rowPro["inStock"] - $demand;
+                $updateProduct = <<<up
+                UPDATE TABLE product SET inStock where id = $productId;
+                up;
                 // echo $addDetail;
                 // exit();
                 mysqli_query($link, $addDetail);
+                mysqli_query($link, $updateProduct);
             }
             $i++;
         }
