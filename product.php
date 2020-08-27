@@ -78,7 +78,7 @@ if($_POST["submit"]){
             <?php while( $row = mysqli_fetch_assoc($result) ) { ?>
                 <a href="oneProduct.php?productId=<?= $row["id"] ?>">
                     <div>
-                        <div class="image" style="background-image: url(CSS/product<?= $row["id"] ?>.jpg)"></div>
+                        <div class="image" style="background-image: url(data:image/jpg;charset:utf8;base64,<?= base64_encode($row["productImg"]); ?>)"></div>
                         <p><?= $row["productName"] ?></p>
                     </div>
                 </a>

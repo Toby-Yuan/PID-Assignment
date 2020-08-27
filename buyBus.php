@@ -121,7 +121,7 @@ if(isset($_POST["cancel"])){
                 
 
                 <div class="detail" id="<?= "detail$i" ?>">
-                    <div class="image" style="background-image: url(CSS/product<?= $productId ?>.jpg)"></div>
+                    <div class="image" style="background-image: url(data:image/jpg;charset:utf8;base64,<?= base64_encode($row["productImg"]); ?>)"></div>
                     <div class="text">
                         <h1><?= $row["productName"] ?></h1>
                         <p>

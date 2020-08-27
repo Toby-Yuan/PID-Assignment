@@ -68,7 +68,14 @@ if(isset($_POST["submit"])){
             </div>
             <div></div>
             <div id="member">
-                <a id="loginOpen">登入</a>
+                <?php if(isset($_SESSION["uid"])) { ?>
+                    <a href="member.php">會員中心</a>
+                    &nbsp;
+                    <a href="buyBus.php">購物車</a>
+                    <a href="index.php?logout=1">登出</a>
+                <?php } else { ?>
+                    <a id="loginOpen">登入</a>
+                <?php } ?>
             </div>
 
         </div>
@@ -78,7 +85,7 @@ if(isset($_POST["submit"])){
     <div id="banner"></div>
 
     <!-- 創建表格 -->
-    <div id="formTitle">註冊會員</div>
+    <div id="formTitle">修改資料</div>
     <form action="" method="post">
         <label for="newName">帳號</label>
         <input type="text" name="newName" id="newName" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required value="<?= $userName ?>">

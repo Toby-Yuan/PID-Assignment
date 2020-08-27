@@ -93,7 +93,7 @@ if($_POST["submit1"]){
 
     <!-- 產品介紹 -->
     <div id="product">
-        <div id="image" style="background-image: url(CSS/product<?= $row["id"] ?>.jpg)"></div>
+        <div id="image" style="background-image: url(data:image/jpg;charset:utf8;base64,<?= base64_encode($row["productImg"]); ?>)"></div>
         <form action="" method="post" id="choose">
             <h1><?= $row["productName"] ?></h1>
             <h2>定價: <?= $row["price"] ?></h2>
