@@ -40,9 +40,11 @@ if(isset($_POST["choose"])){
     $date1 = $_POST["date1"];
     $date2 = $_POST["date2"];
     if($date1 < $date2){
-        $dateCut = (strtotime($date2) - strtotime($date1))/(60*60*24);
+        $bigDate = $date2;
+        $smlDate = $date1;
     }else{
-        $dateCut = (strtotime($date1) - strtotime($date2))/(60*60*24);
+        $bigDate = $date1;
+        $smlDate = $date2;
     }
     
     $serachOne = <<<serachone
@@ -207,7 +209,7 @@ if(isset($_POST["choose"])){
                         SELECT SUM(demand) demand FROM product p
                         JOIN orderDetail od ON od.productId = p.id
                         JOIN memberOrder mo ON od.orderId = mo.id
-                        WHERE DATEDIFF(NOW(), orderTime) < $dateCut AND p.id = $oneId
+                        WHERE orderTime <= '$bigDate' AND orderTime >= '$smlDate' AND p.id = $oneId
                         sallserach;
                         $sallResult = mysqli_query($link, $sall);
                         $sallIt = mysqli_fetch_assoc($sallResult);
