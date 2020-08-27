@@ -12,9 +12,9 @@ if(!isset($_SESSION["mid"])){
     $result = mysqli_query($link, $searchSession);
     $master = mysqli_fetch_assoc($result);
     $searchOrder = <<<searchorder
-    SELECT mo.id, orderDate, delivery, userName  FROM memberOrder mo 
+    SELECT mo.id, orderDate, orderTime, delivery, userName  FROM memberOrder mo 
     JOIN member m ON m.id = mo.memberId
-    ORDER BY orderDate;
+    ORDER BY orderDate DESC;
     searchorder;
     $orderList = mysqli_query($link, $searchOrder);
 }
@@ -43,11 +43,12 @@ if(!isset($_SESSION["mid"])){
     <form action="" method="post" id="allOrder">
         <table>
             <tr>
-                <td colspan="6" id="tableName">訂單列表</td>
+                <td colspan="7" id="tableName">訂單列表</td>
             </tr>
             <tr>
                 <th>編號</th>
                 <th>送達日期</th>
+                <th>訂購時間</th>
                 <th>訂購人</th>
                 <th>內容</th>
                 <th>狀態</th>
@@ -58,6 +59,7 @@ if(!isset($_SESSION["mid"])){
                 <tr>
                     <td><?= $order["id"] ?> <input type="text" name="<?= "name".$order["id"] ?>" id="id" value="<?= $order["id"] ?>"></td>
                     <td><?= $order["orderDate"] ?></td>
+                    <td><?= $order["orderTime"] ?></td>
                     <td><?= $order["userName"] ?></td>
 
                     <?php
