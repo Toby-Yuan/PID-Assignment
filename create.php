@@ -13,16 +13,26 @@ if(isset($_POST["submit"])){
         $address = $_POST["address"];
 
         $userPassword = sha1($userPassword);
+
+        $searchAll = "SELECT userName FROM member";
+        $resultAll = mysqli_query($link, $searchAll);
+
+        while($rowAll = mysqli_fetch_assoc($resultAll)){
+            if($userName = $rowAll['userName']){
+                $repeat = 1;
+            }
+        }
     
-    
-        $addMember = <<<createIn
-        INSERT INTO `member`(`userName`, `userPassword`, `truthName`, `email`, `phone`, `userAddress`) 
-        VALUES ('$userName','$userPassword','$truthName','$email','$phone','$address');
-        createIn;
-        $result = mysqli_query($link, $addMember);
-    
-        header("location: index.php");
-        exit();
+        if($repeat != 1){
+            $addMember = <<<createIn
+            INSERT INTO `member`(`userName`, `userPassword`, `truthName`, `email`, `phone`, `userAddress`) 
+            VALUES ('$userName','$userPassword','$truthName','$email','$phone','$address');
+            createIn;
+            $result = mysqli_query($link, $addMember);
+        
+            header("location: index.php");
+            exit();
+        }
     }
     
 };
