@@ -5,6 +5,7 @@ require_once("connect.php");
 $repeat = 0;
 
 if(isset($_POST["submit"])){
+    $repeat = 0;
     
     if(isset($_POST["check"])){
         $userName = $_POST["newName"];
@@ -16,16 +17,27 @@ if(isset($_POST["submit"])){
 
         $userPassword = sha1($userPassword);
 
-        $searchAll = "SELECT userName FROM member";
+        $searchAll = "SELECT userName, truthName, phone, email FROM member";
         $resultAll = mysqli_query($link, $searchAll);
 
         while($rowAll = mysqli_fetch_assoc($resultAll)){
-            if($userName = $rowAll['userName']){
-                $repeat = 1;
+            if($userName == $rowAll['userName']){
+                $repeatName = 1;
+            }
+            if($truthName == $rowAll['truthName']){
+                $repeatTruth = 1;
+            }
+            if($email == $rowAll['email']){
+                $repeatMail = 1;
+            }
+            if($phone == $rowAll['phone']){
+                $repeatPhone = 1;
             }
         }
     
-        if($repeat != 1){
+        $repeat = $repeatPhone + $repeatName + $repeatMail + $repeatTruth;
+
+        if($repeat == 0){
             $addMember = <<<createIn
             INSERT INTO `member`(`userName`, `userPassword`, `truthName`, `email`, `phone`, `userAddress`) 
             VALUES ('$userName','$userPassword','$truthName','$email','$phone','$address');
@@ -130,15 +142,18 @@ if($_POST["submit1"]){
     <form action="" method="post" id="create">
         <label for="newName">帳號</label>
         <input type="text" name="newName" id="newName" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required>
-        <p><?= ($repeat == 1)? "帳號已使用" : "" ?></p>
+        <p><?= ($repeatName == 1)? "帳號已使用" : "" ?></p>
         <label for="newPassword">密碼</label>
         <input type="password" name="newPassword" id="newPassword" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required>
         <label for="truthName">本名</label>
         <input type="text" name="truthName" id="truthName" required>
+        <p><?= ($repeatTruth == 1)? "此人已使用" : "" ?></p>
         <label for="phone">電話</label>
         <input type="text" name="phone" id="phone" placeholder="範例: 0912345678" pattern="\d{10}" required>
+        <p><?= ($repeatPhone == 1)? "電話已使用" : "" ?></p>
         <label for="email">電子信箱</label>
         <input type="text" name="email" id="email" pattern="\w+([.-]\w+)*@\w+([.]\w+)+" required>
+        <p><?= ($repeatMail == 1)? "信箱已使用" : "" ?></p>
         <label for="address">地址</label>
         <input type="text" name="address" id="address" required>
         

@@ -81,6 +81,11 @@ nav #burger {
   margin-bottom: 20px;
 }
 
+#create p {
+  color: #d33569;
+  margin: 10px 0;
+}
+
 #create input[type="text"], #create input[type="password"] {
   display: block;
   width: 100%;
