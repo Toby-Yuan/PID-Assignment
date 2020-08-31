@@ -2,6 +2,8 @@
 
 session_start();
 require_once("connect.php");
+$repeat = 0;
+
 if(isset($_POST["submit"])){
     
     if(isset($_POST["check"])){
@@ -128,6 +130,7 @@ if($_POST["submit1"]){
     <form action="" method="post" id="create">
         <label for="newName">帳號</label>
         <input type="text" name="newName" id="newName" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required>
+        <p><?= ($repeat == 1)? "帳號已使用" : "" ?></p>
         <label for="newPassword">密碼</label>
         <input type="password" name="newPassword" id="newPassword" placeholder="請輸入8~15位的英文和數字" pattern="\w{8,15}" required>
         <label for="truthName">本名</label>
