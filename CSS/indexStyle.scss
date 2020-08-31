@@ -23,11 +23,12 @@ nav{
     background: $gray;
     position: fixed;
     width: 100%;
+    z-index: 9999;
     
     #box{
         @include box();
         display: grid;
-        grid-template-columns: 50% 30% 20%;
+        grid-template-columns: 50% 20% 30%;
         padding: 12px 5px;
 
         a{
@@ -257,6 +258,35 @@ footer{
                 position: absolute;
                 top: -25px;
                 right: -25px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:1199px){
+    @mixin boxPad {
+        width: 765px;
+    }
+
+    nav #box, #about, #product{
+        @include boxPad();
+    }
+
+    nav #box a{
+        font-size: 20px;
+    }
+
+    nav #box #member #moreA{
+        font-size: 12px;
+    }
+
+    #product{
+        grid-template-columns: repeat(2, 1fr);
+
+        .products{
+
+            &:nth-child(3){
+                grid-column: 1 / 3;
             }
         }
     }

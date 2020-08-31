@@ -60,10 +60,12 @@ if(isset($_GET["logout"])){
             <div></div>
             <div id="member">
                 <?php if(isset($_SESSION["uid"])) { ?>
-                    <a href="member.php">會員中心</a>
-                    &nbsp;
-                    <a href="buyBus.php">購物車</a>
-                    <a href="index.php?logout=1">登出</a>
+                    <div id="moreA">
+                        <a href="member.php">會員中心</a>
+                        &nbsp;
+                        <a href="buyBus.php">購物車</a>
+                        <a href="index.php?logout=1">登出</a>
+                    </div>
                 <?php } else { ?>
                     <a id="loginOpen">登入</a>
                 <?php } ?>
