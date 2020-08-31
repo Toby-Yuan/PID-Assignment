@@ -22,7 +22,7 @@ nav{
     #box{
         @include box();
         display: grid;
-        grid-template-columns: 50% 30% 20%;
+        grid-template-columns: 50% 20% 30%;
         padding: 12px 5px;
 
         a{
@@ -45,6 +45,10 @@ nav{
             text-align: right;
         }
     }
+
+    #burger{
+        display: none;
+    }
 }
 
 #banner{
@@ -55,34 +59,34 @@ nav{
 }
 
 
-    
-    #product{
-        @include box();
-        text-align: center;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 30px;
-        margin-top: 40px;
-        text-align: center;
-    
-        div{
-            text-decoration: none;
-            color: black;
-    
-            .image{
-                width: 100%;
-                height: 250px;
-                background-position: center;
-                background-size: cover;
-            }
-    
-            p{
-                margin-top: 10px;
-                margin-bottom: 10px;
-                font-size: 24px;
-            }
+
+#product{
+    @include box();
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    margin-top: 40px;
+    text-align: center;
+
+    div{
+        text-decoration: none;
+        color: black;
+
+        .image{
+            width: 100%;
+            height: 250px;
+            background-position: center;
+            background-size: cover;
+        }
+
+        p{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 24px;
         }
     }
+}
 
 
 footer{
@@ -179,4 +183,101 @@ footer{
             }
         }
     }
+}
+
+@media screen and (min-width:768px) and (max-width:1199px){
+    @mixin boxPad {
+        width: 765px;
+    }
+
+    nav #box, #product{
+        @include boxPad();
+    }
+
+    nav #box a{
+        font-size: 20px;
+    }
+
+    nav #box #member #moreA{
+        font-size: 12px;
+    }
+
+    #product{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width:767px){
+    @mixin boxPhone {
+        width: 90%;
+    }
+
+    nav{
+        width: 100%;
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+
+    nav #box{
+        display: none;
+    }
+
+    nav #burger{
+        @include boxPhone();
+        display: block;
+
+        a{
+            display: none;
+
+            &:nth-child(1){
+                display: block;
+            }
+
+            img{
+                width: 50px;
+            }
+        }
+
+        #moreA{
+            display: none;
+        }
+
+        &:hover{
+
+            a:nth-child(n+2){
+                width: 100%;
+                display: block;
+                text-align: center;
+                padding: 5px;
+                text-decoration: none;
+                color: black;
+            }
+
+            #moreA{
+                display: block;
+
+                a{
+                    width: 100%;
+                    display: block;
+                    text-align: center;
+                    padding: 5px;
+                    text-decoration: none;
+                    color: black;
+
+                    &:nth-child(1){
+                        color: $red;
+                    }
+                }
+            }
+        }
+    }
+
+    #product{
+        @include boxPhone();
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    footer #contact{
+        width: 100%;
+    }    
 }
