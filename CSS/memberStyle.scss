@@ -27,7 +27,7 @@ nav{
     #box{
         @include box();
         display: grid;
-        grid-template-columns: 50% 30% 20%;
+        grid-template-columns: 50% 20% 30%;
         padding: 12px 5px;
 
         a{
@@ -49,6 +49,10 @@ nav{
         #member{
             text-align: right;
         }
+    }
+
+    #burger{
+        display: none;
     }
 }
 
@@ -129,5 +133,97 @@ footer{
             text-align: right;
             color: black;
         }
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:1199px){
+    @mixin boxPad {
+        width: 765px;
+    }
+
+    nav #box, #memberOnly, h5, #line, .history{
+        @include boxPad();
+    }
+
+    nav #box a{
+        font-size: 20px;
+    }
+
+    nav #box #member #moreA{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width:767px){
+    @mixin boxPhone {
+        width: 90%;
+    }
+
+    nav{
+        width: 100%;
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+
+    nav #box{
+        display: none;
+    }
+
+    nav #burger{
+        @include boxPhone();
+        display: block;
+
+        a{
+            display: none;
+
+            &:nth-child(1){
+                display: block;
+            }
+
+            img{
+                width: 50px;
+            }
+        }
+
+        #moreA{
+            display: none;
+        }
+
+        &:hover{
+
+            a:nth-child(n+2){
+                width: 100%;
+                display: block;
+                text-align: center;
+                padding: 5px;
+                text-decoration: none;
+                color: black;
+            }
+
+            #moreA{
+                display: block;
+
+                a{
+                    width: 100%;
+                    display: block;
+                    text-align: center;
+                    padding: 5px;
+                    text-decoration: none;
+                    color: black;
+
+                    &:nth-child(1){
+                        color: $red;
+                    }
+                }
+            }
+        }
+    }
+
+    #memberOnly, h5, #line, .history{
+        @include boxPhone();
+    }
+
+    footer #contact{
+        width: 90%;
     }
 }
