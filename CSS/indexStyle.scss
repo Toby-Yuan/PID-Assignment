@@ -23,7 +23,6 @@ nav{
     background: $gray;
     position: fixed;
     width: 100%;
-    z-index: 9999;
     
     #box{
         @include box();
@@ -200,6 +199,7 @@ footer{
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 9999;
 
     #loginInput{
         width: 800px;
