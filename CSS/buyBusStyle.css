@@ -45,6 +45,10 @@ nav #box #member {
   text-align: right;
 }
 
+nav #burger {
+  display: none;
+}
+
 #banner {
   width: 100%;
   height: 400px;

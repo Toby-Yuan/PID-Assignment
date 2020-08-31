@@ -18,8 +18,8 @@ nav #box {
   margin: 0 auto;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 50% 30% 20%;
-      grid-template-columns: 50% 30% 20%;
+  -ms-grid-columns: 50% 20% 30%;
+      grid-template-columns: 50% 20% 30%;
   padding: 12px 5px;
 }
 
@@ -43,6 +43,10 @@ nav #box #link {
 
 nav #box #member {
   text-align: right;
+}
+
+nav #burger {
+  display: none;
 }
 
 #banner {
@@ -202,5 +206,75 @@ footer #contact #logo {
   position: absolute;
   top: -25px;
   right: -25px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  nav #box {
+    width: 765px;
+  }
+  nav #box a {
+    font-size: 20px;
+  }
+  nav #box #member #moreA {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  nav {
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+  nav #box {
+    display: none;
+  }
+  nav #burger {
+    width: 90%;
+    display: block;
+  }
+  nav #burger a {
+    display: none;
+  }
+  nav #burger a:nth-child(1) {
+    display: block;
+  }
+  nav #burger a img {
+    width: 50px;
+  }
+  nav #burger #moreA {
+    display: none;
+  }
+  nav #burger:hover a:nth-child(n+2) {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+  }
+  nav #burger:hover #moreA {
+    display: block;
+  }
+  nav #burger:hover #moreA a {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+  }
+  nav #burger:hover #moreA a:nth-child(1) {
+    color: #d33569;
+  }
+  #create {
+    width: 90%;
+  }
+  #create #btnGroup {
+    width: 60%;
+  }
+  footer #contact {
+    width: 90%;
+  }
 }
 /*# sourceMappingURL=createStyle.css.map */
