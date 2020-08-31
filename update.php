@@ -30,6 +30,8 @@ if(isset($_POST["submit"])){
         $phone = $_POST["phone"];
         $userAddress = $_POST["address"];
 
+        $userPassword = sha1($userPassword);
+
         $update = <<<updateSql
         UPDATE member SET userName = '$userName', userPassword = '$userPassword', truthName = '$truthName',
         email = '$email', phone = '$phone', userAddress = '$userAddress'
@@ -78,6 +80,24 @@ if(isset($_POST["submit"])){
                 <?php } ?>
             </div>
 
+        </div>
+
+        <!-- 手機版漢堡區域 -->
+        <div id="burger">
+            <a href=""><img src="burger.png" alt=""></a>
+            <a href="index.php">三點半</a>
+            <a href="index.php#about">關於我們</a>
+            <a href="product.php">熱門商品</a>
+            <a href="index.php#contact">聯絡我們</a>
+            <?php if(isset($_SESSION["uid"])) { ?>
+                <div id="moreA">
+                    <a href="member.php">會員中心</a>
+                    <a href="buyBus.php">購物車</a>
+                    <a href="index.php?logout=1">登出</a>
+                </div>
+            <?php } else { ?>
+                <a id="loginOpen">登入</a>
+            <?php } ?>
         </div>
     </nav>
 
