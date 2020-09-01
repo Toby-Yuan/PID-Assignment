@@ -246,6 +246,10 @@ if(isset($_POST["choose"])){
         if(isset($_POST["oneM"])) { 
             echo '<img src="onemonth.php" alt="">';
         }
+
+        if(isset($_POST["choose"])) { 
+            echo '<img src="choose.php?bigDate=' . $bigDate .'&smlDate=' . $smlDate . '" alt="">';
+        }
         ?>
     </div>
 </body>
