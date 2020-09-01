@@ -66,3 +66,7 @@ h1{
     @include box();
     margin-top: 40px;
 }
+
+#image{
+    @include box();
+}

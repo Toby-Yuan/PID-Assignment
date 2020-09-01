@@ -233,5 +233,8 @@ if(isset($_POST["choose"])){
     
     <h1>總營收: <?= $income ?></h1>
 
+    <div id="image">
+        <img src="image.php" alt="">
+    </div>
 </body>
 </html>
