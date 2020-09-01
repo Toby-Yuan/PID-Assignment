@@ -98,7 +98,7 @@ if(!isset($_SESSION["uid"])){
             $orderDetail = <<<searchorderdetail
             SELECT p.id, SUM(demand) demand
             FROM orderDetail od
-            JOIN product p ON p.id = od.productId
+            JOIN oldProduct p ON p.id = od.productId
             WHERE orderId = $oid 
             GROUP BY p.id;
             searchorderdetail;
