@@ -242,6 +242,10 @@ if(isset($_POST["choose"])){
         if(isset($_POST["senD"])) { 
             echo '<img src="senday.php" alt="">';
         }
+
+        if(isset($_POST["oneM"])) { 
+            echo '<img src="onemonth.php" alt="">';
+        }
         ?>
     </div>
 </body>
