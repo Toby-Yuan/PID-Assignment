@@ -16,7 +16,7 @@ if(!isset($_SESSION["uid"])){
 
     $searchOrder = <<<searchorder
     SELECT id, orderDate, orderTime FROM memberOrder 
-    WHERE memberId = $uid ORDER BY orderDate;
+    WHERE memberId = $uid ORDER BY orderTime DESC;
     searchorder;
     $memberOrder = mysqli_query($link, $searchOrder);
 }
@@ -94,35 +94,37 @@ if(!isset($_SESSION["uid"])){
         while($order = mysqli_fetch_assoc($memberOrder)) { 
             $oid = $order["id"];
             $oDate = $order["orderDate"];
+            $oTime = $order["orderTime"];
             $orderDetail = <<<searchorderdetail
-            SELECT productName, demand 
+            SELECT p.id, SUM(demand) demand
             FROM orderDetail od
             JOIN product p ON p.id = od.productId
-            WHERE orderId = $oid;
+            WHERE orderId = $oid 
+            GROUP BY p.id;
             searchorderdetail;
-            $orderTotalPrice = <<<total
-            SELECT SUM(demand * price) totalPrice FROM orderDetail od 
-            JOIN product p ON p.id = od.productId 
-            WHERE orderId = $oid;
-            total;
             // echo $orderDetail;
             // echo $orderTotalPrice;
             $thisOrderDetail = mysqli_query($link, $orderDetail);
-            $thisOrderTotal = mysqli_query($link, $orderTotalPrice);
     ?>
 
     <div class="history">
-        <h3>訂購日期: <span><?= $order["orderTime"] ?></span></h3>
-        <h3>送達日期: <span><?= $oDate ?></span></h3>
+        <h3>訂購日期: <?= $oTime ?></h3>
+        <h3>送達日期: <?= $oDate ?></h3>
         <p>
-        <?php while($detail = mysqli_fetch_assoc($thisOrderDetail)) { ?>
-            <span><?= $detail["productName"] ?></span> x <span><?= $detail["demand"] ?></span> <br>
+        <?php 
+            $total = 0;
+            while($detail = mysqli_fetch_assoc($thisOrderDetail)) { 
+                $pid = $detail["id"];
+                $searchOld = "SELECT productName, price FROM oldProduct WHERE productId = $pid AND changeTime <= '$oTime' ORDER BY changeTime DESC LIMIT 1";
+                $resultOld = mysqli_query($link, $searchOld);
+                $old = mysqli_fetch_assoc($resultOld);
+                $total += $old["price"] * $detail["demand"];
+        ?>
+            <?= $old["productName"] ?> : <?= $old["price"] ?> x <?= $detail["demand"] ?> <br>
         <?php } ?>
         </p>
 
-        <?php while($total = mysqli_fetch_assoc($thisOrderTotal)) { ?>
-            <h3>Total: <span><?= $total["totalPrice"] ?></span></h3>
-        <?php } ?>
+        <h3>Total: <?= $total ?> </h3>
         <hr>
     </div>
 
