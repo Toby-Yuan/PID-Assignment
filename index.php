@@ -3,6 +3,14 @@
 require_once("connect.php");
 session_start();
 
+$searchTop = <<<searchtop
+SELECT p.id, productImg, productName,
+(SELECT SUM(demand) FROM orderDetail WHERE productId = (SELECT p.id)) demand 
+FROM product p
+ORDER BY demand DESC LIMIT 3
+searchtop;
+$resultTop = mysqli_query($link, $searchTop);
+
 if($_POST["submit"]){
 
     $userName = $_POST["userName"];
@@ -113,7 +121,14 @@ if(isset($_GET["logout"])){
     <h1 id="productText">熱門產品</h1>
 
     <section id="product">
-        <div class="products">
+
+        <?php while($top = mysqli_fetch_assoc($resultTop)){ ?>
+            <div class="products" style="background-image: url(data:image/jpg;charset:utf8;base64,<?= base64_encode($top["productImg"]); ?>)">
+                <div class="name"><?= $top["productName"] ?></div>
+            </div>
+        <?php } ?>
+
+        <!-- <div class="products">
             <div class="name">巫女們的宴會</div>
         </div>
         <div class="products">
@@ -121,7 +136,7 @@ if(isset($_GET["logout"])){
         </div>
         <div class="products">
             <div class="name">梵谷的星空</div>
-        </div>
+        </div> -->
 
         <div id="link">
             <a href="product.php">MORE _______</a>
