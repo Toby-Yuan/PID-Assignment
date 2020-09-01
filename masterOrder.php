@@ -14,7 +14,7 @@ if(!isset($_SESSION["mid"])){
     $searchOrder = <<<searchorder
     SELECT mo.id, orderDate, orderTime, delivery, userName  FROM memberOrder mo 
     JOIN member m ON m.id = mo.memberId
-    ORDER BY orderTime DESC;
+    ORDER BY orderDate DESC;
     searchorder;
     $orderList = mysqli_query($link, $searchOrder);
 }
@@ -68,7 +68,7 @@ if(!isset($_SESSION["mid"])){
                         $searchOD = <<<searchod
                         SELECT productName, demand
                         FROM orderDetail od
-                        JOIN product p ON p.id = od.productId
+                        JOIN (SELECT productName, productId FROM oldProduct GROUP BY productId, productName) p ON p.productId = od.productId
                         WHERE orderId = $orderId;
                         searchod;
                         $resultOD = mysqli_query($link, $searchOD);
