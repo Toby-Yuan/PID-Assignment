@@ -98,11 +98,14 @@ if(isset($_POST["new"])){
                     $productName = $_POST["product$productId"];
                     $price = $_POST["price$productId"];
                     $stock = $_POST["stock$productId"];
+                    $time = date("Y-m-d H:i:s");
                     $updateIt = <<<updateit
                     UPDATE product SET productName = '$productName', price = $price, inStock = $stock
                     WHERE id = $productId
                     updateit;
+                    $insertSql = "INSERT INTO oldProduct (productId, productName, price, changeTime) VALUES ($productId, '$productName', $price, '$time')";
                     mysqli_query($link, $updateIt);
+                    mysqli_query($link, $insertSql);
                     header("location: master.php");
                 }
 
