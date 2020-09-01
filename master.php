@@ -19,6 +19,7 @@ if(!isset($_SESSION["mid"])){
 if(isset($_POST["new"])){
     $newProduct = $_POST["newProduct"];
     $newPrice = $_POST["newPrice"];
+    $newStock = $_POST["newStock"];
 
     if(!empty($_FILES["image"]["name"])) { 
         // Get file info 
@@ -32,8 +33,17 @@ if(isset($_POST["new"])){
             $imgContent = addslashes(file_get_contents($image)); 
          
             // Insert image content into database 
-            $create = "INSERT INTO product (productName, price, productImg) VALUES ('$newProduct', $newPrice,'$imgContent')";
+            $create = "INSERT INTO product (productName, price, productImg, inStock) VALUES ('$newProduct', $newPrice,'$imgContent', $newStock)";
             mysqli_query($link, $create);
+
+            $searchNew = "SELECT id FROM product WHERE productName = '$newProduct'";
+            $resultNew = mysqli_query($link, $searchNew);
+            $newItem = mysqli_fetch_assoc($resultNew);
+            $productNew = $newItem["id"];
+
+            $time = date("Y-m-d H:i:s");
+            $insertNew = "INSERT INTO oldProduct (productId, productName, price, changeTime) VALUES ($productNew, '$newProduct', $newPrice, '$time')";
+            mysqli_query($link, $insertNew);
         }
     }
 
@@ -136,11 +146,12 @@ if(isset($_POST["new"])){
     <form action="" method="post" enctype="multipart/form-data">
         <table>
             <tr>
-                <td colspan="4" id="tableName">新增商品</td>
+                <td colspan="5" id="tableName">新增商品</td>
             </tr>
             <tr>
                 <th>品名</th>
                 <th>定價</th>
+                <th>庫存</th>
                 <th>圖片</th>
                 <th>確認</th>
             </tr>
@@ -148,6 +159,7 @@ if(isset($_POST["new"])){
             <tr>
                 <td><input type="text" name="newProduct"></td>
                 <td><input type="text" name="newPrice"></td>
+                <td><input type="text" name="newStock"></td>
                 <td><input type="file" name="image"></td>
                 <td style="width: 200px">
                     <input type="submit" value="新增" name="new">
