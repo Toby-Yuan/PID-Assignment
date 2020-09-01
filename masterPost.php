@@ -234,9 +234,15 @@ if(isset($_POST["choose"])){
     <h1>總營收: <?= $income ?></h1>
 
     <div id="image">
-        <?php if(isset($_POST["oneD"])) { 
+        <?php 
+        if(isset($_POST["oneD"])) { 
             echo '<img src="oneday.php" alt="">';
-         } ?>
+        } 
+
+        if(isset($_POST["senD"])) { 
+            echo '<img src="senday.php" alt="">';
+        }
+        ?>
     </div>
 </body>
 </html>

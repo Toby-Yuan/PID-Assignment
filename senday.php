@@ -18,7 +18,7 @@ while($one = mysqli_fetch_assoc($resultOne)){
     SELECT SUM(demand) demand FROM product p
     JOIN orderDetail od ON od.productId = p.id
     JOIN memberOrder mo ON od.orderId = mo.id
-    WHERE DATEDIFF(NOW(), orderTime) < 1 AND p.id = $oneId
+    WHERE DATEDIFF(NOW(), orderTime) < 7 AND p.id = $oneId
     sallserach;
     $sallResult = mysqli_query($link, $sall);
     $sallIt = mysqli_fetch_assoc($sallResult);
@@ -50,7 +50,7 @@ $bplot->SetFillColor('orange');
 $graph->Add($bplot);
  
 // Setup the titles
-$graph->title->Set('One Day');
+$graph->title->Set('One Week');
 $graph->xaxis->title->Set('Product ID');
 $graph->yaxis->title->Set('Demand');
  
