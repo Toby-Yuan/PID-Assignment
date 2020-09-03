@@ -11,6 +11,8 @@ nav {
   background: #dadada;
   position: fixed;
   width: 100%;
+  -webkit-box-shadow: 0 10px 15px #d33569;
+          box-shadow: 0 10px 15px #d33569;
 }
 
 nav #box {
@@ -31,6 +33,16 @@ nav #box a {
 
 nav #box a:nth-child(1) {
   color: #d33569;
+  cursor: pointer;
+}
+
+nav #box a:nth-child(n+2) {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+nav #box a:nth-child(n+2):hover {
+  color: #698852;
 }
 
 nav #box #link {
@@ -110,6 +122,14 @@ form #btnGroup .button {
   background: #d33569;
   color: #dadada;
   padding: 5px;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+form #btnGroup .button:hover {
+  background: #698852;
+  font-size: 24px;
 }
 
 footer {

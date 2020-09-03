@@ -23,6 +23,7 @@ nav{
     background: $gray;
     position: fixed;
     width: 100%;
+    box-shadow: 0 10px 15px $red;
     
     #box{
         @include box();
@@ -34,9 +35,17 @@ nav{
             text-decoration: none;
             color: black;
             font-size: 24px;
+            transition: 0.5s;
 
             &:nth-child(1){
                 color: $red;
+                cursor: pointer;
+            }
+
+            &:nth-child(n+2){
+                &:hover{
+                    color: rgb(105, 136, 82);
+                }
             }
         }
 
@@ -118,21 +127,24 @@ nav{
         position: relative;
         background-position: center;
         background-size: cover;
+        transition: 0.5s;
 
         .name{
-            display: none;
             width: 100%;
             position: absolute;
             bottom: 0;
             background: $name;
             text-align: center;
-            font-size: 16px;
+            font-size: 1px;
             padding: 8px 0;
+            transition: 0.5s;
         }
 
         &:hover{
+            box-shadow: 0 0 15px $red;
+
             .name{
-                display: inline;
+                font-size: 24px;
             }
         }
     }
@@ -145,9 +157,12 @@ nav{
         a{
             text-decoration: none;
             color: black;
+            transition: 0.5s;
 
             &:hover{
                 color: $red;
+                font-size: 24px;
+                font-weight: 600;
             }
         }
     }

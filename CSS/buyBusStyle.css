@@ -11,6 +11,8 @@ nav {
   background: #dadada;
   position: fixed;
   width: 100%;
+  -webkit-box-shadow: 0 10px 15px #d33569;
+          box-shadow: 0 10px 15px #d33569;
 }
 
 nav #box {
@@ -31,6 +33,16 @@ nav #box a {
 
 nav #box a:nth-child(1) {
   color: #d33569;
+  cursor: pointer;
+}
+
+nav #box a:nth-child(n+2) {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+nav #box a:nth-child(n+2):hover {
+  color: #698852;
 }
 
 nav #box #link {
@@ -110,18 +122,26 @@ nav #burger {
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  padding-top: 5px;
 }
 
 #buyBus .detail .btn:nth-child(1) {
-  background: #3567d3;
+  background: #35aed3;
 }
 
 #buyBus .detail .btn:nth-child(2) {
-  background: #27c521;
+  background: #3ae06c;
 }
 
 #buyBus .detail .btn:nth-child(3) {
-  background: #9c4b4b;
+  background: #e06e6e;
+}
+
+#buyBus .detail .btn:hover {
+  -webkit-box-shadow: 0 0 10px #d33569;
+          box-shadow: 0 0 10px #d33569;
 }
 
 #buyBus #line {
@@ -148,6 +168,7 @@ nav #burger {
   color: #dadada;
   padding: 5px 20px;
   font-size: 24px;
+  cursor: pointer;
 }
 
 #buyBus #submit:hover {
@@ -162,6 +183,7 @@ nav #burger {
   color: black;
   padding: 5px 20px;
   font-size: 24px;
+  cursor: pointer;
 }
 
 footer {

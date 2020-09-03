@@ -11,6 +11,8 @@ nav {
   background: #dadada;
   position: fixed;
   width: 100%;
+  -webkit-box-shadow: 0 10px 15px #d33569;
+          box-shadow: 0 10px 15px #d33569;
 }
 
 nav #box {
@@ -27,10 +29,17 @@ nav #box a {
   text-decoration: none;
   color: black;
   font-size: 24px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 nav #box a:nth-child(1) {
   color: #d33569;
+  cursor: pointer;
+}
+
+nav #box a:nth-child(n+2):hover {
+  color: #698852;
 }
 
 nav #box #link {
@@ -121,21 +130,29 @@ nav #burger {
   position: relative;
   background-position: center;
   background-size: cover;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 #product .products .name {
-  display: none;
   width: 100%;
   position: absolute;
   bottom: 0;
   background: rgba(218, 218, 218, 0.637);
   text-align: center;
-  font-size: 16px;
+  font-size: 1px;
   padding: 8px 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#product .products:hover {
+  -webkit-box-shadow: 0 0 15px #d33569;
+          box-shadow: 0 0 15px #d33569;
 }
 
 #product .products:hover .name {
-  display: inline;
+  font-size: 24px;
 }
 
 #product #link {
@@ -147,10 +164,14 @@ nav #burger {
 #product #link a {
   text-decoration: none;
   color: black;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 #product #link a:hover {
   color: #d33569;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 footer {
