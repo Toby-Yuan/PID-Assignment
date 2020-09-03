@@ -235,20 +235,20 @@ if(isset($_POST["choose"])){
 
     <div id="image">
         <?php 
-        if(isset($_POST["oneD"])) { 
-            echo '<img src="oneday.php" alt="">';
+        if(isset($_POST["oneD"])) {
+            require_once './img/oneday.php';
         } 
 
         if(isset($_POST["senD"])) { 
-            echo '<img src="senday.php" alt="">';
+            require_once './img/senday.php';
         }
 
         if(isset($_POST["oneM"])) { 
-            echo '<img src="onemonth.php" alt="">';
+            require_once './img/onemonth.php';
         }
 
         if(isset($_POST["choose"])) { 
-            echo '<img src="choose.php?bigDate=' . $bigDate .'&smlDate=' . $smlDate . '" alt="">';
+            include_once "./img/choose.php";
         }
         ?>
     </div>
