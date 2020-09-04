@@ -246,10 +246,6 @@ if(isset($_POST["choose"])){
         if(isset($_POST["oneM"])) { 
             require_once './img/onemonth.php';
         }
-
-        if(isset($_POST["choose"])) { 
-            require_once "./img/choose.php?bigDate=$bigDate&smlDate=$smlDate";
-        }
         ?>
     </div>
 </body>
