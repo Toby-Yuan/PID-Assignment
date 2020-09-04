@@ -248,7 +248,7 @@ if(isset($_POST["choose"])){
         }
 
         if(isset($_POST["choose"])) { 
-            include_once "./img/choose.php";
+            require_once "./img/choose.php?bigDate=$bigDate&smlDate=$smlDate";
         }
         ?>
     </div>
