@@ -1,6 +1,7 @@
 <?php
 require_once './controllers/helloController.php';
 $test = new helloC();
+$test->result->logout();
 ?>
 
 <!DOCTYPE html>
@@ -28,16 +29,7 @@ $test = new helloC();
             </div>
             <div></div>
             <div id="member">
-                <?php if(isset($_SESSION["uid"])) { ?>
-                    <div id="moreA">
-                        <a href="member.php">會員中心</a>
-                        &nbsp;
-                        <a href="buyBus.php">購物車</a>
-                        <a href="index.php?logout=1">登出</a>
-                    </div>
-                <?php } else { ?>
-                    <a id="loginOpen">登入</a>
-                <?php } ?>
+                <?= $test->login() ?>
             </div>
 
         </div>
@@ -49,15 +41,7 @@ $test = new helloC();
             <a href="#about">關於我們</a>
             <a href="product.php">熱門商品</a>
             <a href="#contact">聯絡我們</a>
-            <?php if(isset($_SESSION["uid"])) { ?>
-                <div id="moreA">
-                    <a href="member.php">會員中心</a>
-                    <a href="buyBus.php">購物車</a>
-                    <a href="index.php?logout=1">登出</a>
-                </div>
-            <?php } else { ?>
-                <a id="loginOpen">登入</a>
-            <?php } ?>
+            <?= $test->login() ?>
         </div>
     </nav>
 

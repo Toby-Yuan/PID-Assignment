@@ -1,6 +1,7 @@
 <?php
 
 require_once './models/helloModel.php';
+session_start();
 
 class helloC {
     public $result;
@@ -26,6 +27,25 @@ class helloC {
         }
 
         return $show;
+    }
+
+    // 登入系統
+    public function login(){
+        if($this->result->memberLogin() != ""){
+            $_SESSION['uid'] = $this->result->memberLogin();
+
+            $memberShow = <<<membershow
+            <div id="moreA">
+                <a href="./member">會員中心</a>
+                &nbsp;
+                <a href="./buyBus">購物車</a>
+                <a href="./hello?logout=1">登出</a>
+            </div>
+            membershow;
+            return $memberShow;
+        }else{
+            return "<a id='loginOpen'>登入</a>";
+        }
     }
 }
 

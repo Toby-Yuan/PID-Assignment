@@ -1,6 +1,7 @@
 <?php
 
 require_once './models/database.php';
+session_start();
 
 class helloM extends database{
 
@@ -14,6 +15,39 @@ class helloM extends database{
 
         $search = self::query($searchList);
         return $search;
+    }
+
+    // 登入系統
+    public function memberLogin(){
+        if($_POST["submit"]){
+            $userName = $_POST["userName"];
+            $userPassword = $_POST["userPassword"];
+            $userPassword = sha1($userPassword);
+
+            if(isset($userName)){
+                $searchIt = <<<searchit
+                SELECT id, userName, userPassword, black
+                FROM member
+                WHERE userName = '$userName';
+                searchit;
+                $search = self::query($searchIt);
+
+                $passwordCheck = $search[0]['userPassword'];
+
+                if(($userPassword == $passwordCheck) && ($search[0]['black'] != 1)){
+                    return $search[0]['id'];
+                }
+            }
+        }
+    }
+
+    // 登出系統
+    public function logout(){
+        if(isset($_GET["logout"])){
+            unset($_SESSION["uid"]);
+            header("location: ./hello");
+            exit();
+        }
     }
 
 }
