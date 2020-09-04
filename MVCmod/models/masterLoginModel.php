@@ -16,7 +16,7 @@ class masterLoginM extends database{
             $search = self::query("SELECT * FROM webMaster WHERE userName = '$userName'");
 
             if($userPassword == $search[0]['userPassword']){
-                $_SESSION["mid"] = $row["id"];
+                $_SESSION["mid"] = $search[0]['id'];
                 header("location: ./master");
                 exit();
             }

@@ -1,6 +1,7 @@
 <?php
 require_once './controllers/masterController.php';
 $test = new masterC();
+$test->result->newPro();
 ?>
 <!DOCTYPE html>
 <html lang="zh">
@@ -13,11 +14,11 @@ $test = new masterC();
 <body>
     <nav>
         <div id="box">
-            <h4>管理員: <?= $master["userName"] ?></h4>
+            <h4>管理員: <?= $test->result->member[0]['userName'] ?></h4>
             <a href="#">商品列表</a>
-            <a href="masterMember.php">會員列表</a>
-            <a href="masterOrder.php">訂單管理</a>
-            <a href="masterPost.php">報表統計</a>
+            <a href="./masterMember">會員列表</a>
+            <a href="./masterOrder">訂單管理</a>
+            <a href="./masterPost">報表統計</a>
             <div></div>
         </div>
     </nav>
@@ -36,49 +37,7 @@ $test = new masterC();
                 <th>修改／刪除</th>
             </tr>
 
-            <?php   
-                while($product = mysqli_fetch_assoc($resultPro)) { 
-                    $productId = $product["id"];
-            ?>
-
-                <tr>
-                    <td><?= $product["id"] ?> <input type="text" name="<?= "id".$product["id"] ?>" value="<?= $product["id"] ?>" class="id"></td>
-                    <td class="imgIn"><div class="imgBg" style="background-image: url(data:image/jpg;charset:utf8;base64,<?= base64_encode($product["productImg"]); ?>)"></div></td>
-                    <td><input type="text" name="<?= "product".$product["id"] ?>" value="<?= $product["productName"] ?>"></td>
-                    <td><input type="text" name="<?= "price".$product["id"] ?>" value="<?= $product["price"] ?>"></td>
-                    <td><input type="text" name="<?= "stock".$product["id"] ?>" value="<?= $product["inStock"] ?>"></td>
-                    <td style="width: 200px">
-                        <input type="submit" value="修改" name="<?php $update = "update".$product["id"]; echo $update; ?>">
-                        <input type="submit" value="刪除" name="<?php $delete = "delete".$product["id"]; echo $delete; ?>">
-                    </td>
-                </tr>
-
-            <?php 
-                if(isset($_POST["$update"])){
-                    $productName = $_POST["product$productId"];
-                    $price = $_POST["price$productId"];
-                    $stock = $_POST["stock$productId"];
-                    $time = date("Y-m-d H:i:s");
-                    $updateIt = <<<updateit
-                    UPDATE product SET productName = '$productName', price = $price, inStock = $stock
-                    WHERE id = $productId
-                    updateit;
-                    $insertSql = "INSERT INTO oldProduct (productId, productName, price, changeTime) VALUES ($productId, '$productName', $price, '$time')";
-                    mysqli_query($link, $updateIt);
-                    mysqli_query($link, $insertSql);
-                    header("location: master.php");
-                }
-
-                if(isset($_POST["$delete"])){
-                    $deleteIt = "DELETE FROM product WHERE id = $productId";
-                    if($master["grade"] < 3){
-                        mysqli_query($link, $deleteIt);
-                        header("location: master.php");
-                    }
-                }
-
-                } 
-            ?>
+            <?= $test->listPro() ?>
         </table>
     </form>
 
