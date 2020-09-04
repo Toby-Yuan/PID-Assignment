@@ -66,7 +66,7 @@ $test = new productC();
                     <label for="userPassword">密碼</label>
                     <input type="password" name="userPassword" id="userPassword">
                     <input type="submit" value="送出" id="submit" name="submit">
-                    <a href="create.php">會員註冊</a>
+                    <a href="./create">會員註冊</a>
                 </form>
                 <button id="close">X</button>
             </div>

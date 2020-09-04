@@ -1,7 +1,10 @@
 <?php
+require_once './controllers/oneProductController.php';
 require_once './controllers/helloController.php';
-$test = new helloC();
-$test->result->logout();
+$login = new helloC();
+$login->result->logout();
+$test = new oneProductC();
+$test->result->add();
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +14,7 @@ $test->result->logout();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>三點半</title>
 
-    <link rel="stylesheet" href="./CSS/indexStyle.css">
+    <link rel="stylesheet" href="./CSS/oneProductStyle.css">
 
 </head>
 <body>
@@ -22,14 +25,14 @@ $test->result->logout();
 
             <!--  本頁面各連結 -->
             <div id="link">
-                <a href="#">三點半</a>
-                <a href="#about">關於我們</a>
+                <a href="./hello">三點半</a>
+                <a href="./hello">關於我們</a>
                 <a href="./product">熱門商品</a>
-                <a href="#contact">聯絡我們</a>
+                <a href="./hello">聯絡我們</a>
             </div>
             <div></div>
             <div id="member">
-                <?= $test->login() ?>
+                <?= $login->login() ?>
             </div>
 
         </div>
@@ -37,65 +40,42 @@ $test->result->logout();
         <!-- 手機版漢堡區域 -->
         <div id="burger">
             <a href=""><img src="burger.png" alt=""></a>
-            <a href="#">三點半</a>
-            <a href="#about">關於我們</a>
+            <a href="./hello">三點半</a>
+            <a href="./hello">關於我們</a>
             <a href="./product">熱門商品</a>
-            <a href="#contact">聯絡我們</a>
-            <?= $test->login() ?>
+            <a href="./hello">聯絡我們</a>
+            <?= $login->login() ?>
         </div>
     </nav>
 
     <!-- 輪轉圖 -->
     <div id="banner"></div>
 
-    <!-- 關於我們 -->
-    <section id="about">
-        <h1>關於我們</h1>
-        <div id="image"></div>
-        <div id="text">
-            <h5>三點半 3.PI</h5>
-            <p>
-                一個完整的派就是一個圓, 而一個圓也就是一個PI<br>
-                而PI也代表著3點, 正如我們的出爐時間<br>
-                為完美的午茶, 點綴完美的句點
-            </p>
-        </div>
-    </section>
+    <!-- 產品介紹 -->
+    <div id="product">
+        <?= $test->product() ?>
+    </div>
 
-    <!-- 熱門產品 -->
-    <h1 id="productText">熱門產品</h1>
-
-    <section id="product">
-
-        <?= $test->showTop() ?>
-
-        <div id="link">
-            <a href="product.php">MORE _______</a>
-        </div>
-    </section>
+    <!-- 測試 -->
 
     <!-- 登入區塊 -->
     <div id="login">
         <div id="loginInput">
             <div id="image"></div>
             <div id="text">
-                <form action="" method="POST">
+                <form action="" method="POST" id="loginForm">
                     <label for="userName">帳號</label>
                     <input type="text" name="userName" id="userName">
                     <label for="userPassword">密碼</label>
                     <input type="password" name="userPassword" id="userPassword">
-                    <input type="submit" value="送出" id="submit" name="submit">
+                    <input type="submit" value="送出" id="submit" name="submit1">
                     <a href="./create">會員註冊</a>
                 </form>
                 <button id="close">X</button>
             </div>
         </div>
     </div>
-
-    <!-- 測試區域 -->
-    <div id="test">
-        
-    </div>
+    
 
     <!-- 聯絡我們 -->
     <footer>
@@ -111,10 +91,24 @@ $test->result->logout();
             </div>
         </div>
     </footer>
+    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function (){
+            var need = $("#need").val();
+            $("#sub").on("click",function (){
+                need++;
+                $("#need").val(need);
+            });
+
+            $("#cut").on("click", function (){
+                if(need > 0){
+                    need--;
+                    $("#need").val(need);
+                }
+            });
+
             $("#login").hide();
 
             $("#member").on("click", function(){
@@ -127,7 +121,6 @@ $test->result->logout();
                 $("#login").hide();
             });
         });
-
     </script>
 </body>
 </html>
