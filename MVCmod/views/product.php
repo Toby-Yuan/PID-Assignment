@@ -1,7 +1,9 @@
 <?php
+require_once './controllers/productController.php';
 require_once './controllers/helloController.php';
-$test = new helloC();
-$test->result->logout();
+$login = new helloC();
+$login->result->logout();
+$test = new productC();
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +13,7 @@ $test->result->logout();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>三點半</title>
 
-    <link rel="stylesheet" href="./CSS/indexStyle.css">
+    <link rel="stylesheet" href="./CSS/productStyle.css">
 
 </head>
 <body>
@@ -22,14 +24,14 @@ $test->result->logout();
 
             <!--  本頁面各連結 -->
             <div id="link">
-                <a href="#">三點半</a>
-                <a href="#about">關於我們</a>
-                <a href="./product">熱門商品</a>
-                <a href="#contact">聯絡我們</a>
+                <a href="./hello">三點半</a>
+                <a href="./hello">關於我們</a>
+                <a href="#">熱門商品</a>
+                <a href="./hello">聯絡我們</a>
             </div>
             <div></div>
             <div id="member">
-                <?= $test->login() ?>
+                <?= $login->login() ?>
             </div>
 
         </div>
@@ -37,42 +39,21 @@ $test->result->logout();
         <!-- 手機版漢堡區域 -->
         <div id="burger">
             <a href=""><img src="burger.png" alt=""></a>
-            <a href="#">三點半</a>
-            <a href="#about">關於我們</a>
-            <a href="./product">熱門商品</a>
-            <a href="#contact">聯絡我們</a>
-            <?= $test->login() ?>
+            <a href="./hello">三點半</a>
+            <a href="./hello">關於我們</a>
+            <a href="#">熱門商品</a>
+            <a href="./hello">聯絡我們</a>
+            <?= $login->login() ?>
         </div>
     </nav>
 
     <!-- 輪轉圖 -->
     <div id="banner"></div>
 
-    <!-- 關於我們 -->
-    <section id="about">
-        <h1>關於我們</h1>
-        <div id="image"></div>
-        <div id="text">
-            <h5>三點半 3.PI</h5>
-            <p>
-                一個完整的派就是一個圓, 而一個圓也就是一個PI<br>
-                而PI也代表著3點, 正如我們的出爐時間<br>
-                為完美的午茶, 點綴完美的句點
-            </p>
-        </div>
-    </section>
-
-    <!-- 熱門產品 -->
-    <h1 id="productText">熱門產品</h1>
-
-    <section id="product">
-
-        <?= $test->showTop() ?>
-
-        <div id="link">
-            <a href="product.php">MORE _______</a>
-        </div>
-    </section>
+    <!-- 產品 -->
+    <div id="product">
+        <?= $test->listPro() ?>
+    </div>
 
     <!-- 登入區塊 -->
     <div id="login">
@@ -92,11 +73,6 @@ $test->result->logout();
         </div>
     </div>
 
-    <!-- 測試區域 -->
-    <div id="test">
-        
-    </div>
-
     <!-- 聯絡我們 -->
     <footer>
         <div id="contact">
@@ -111,6 +87,7 @@ $test->result->logout();
             </div>
         </div>
     </footer>
+    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -127,7 +104,6 @@ $test->result->logout();
                 $("#login").hide();
             });
         });
-
     </script>
 </body>
 </html>
