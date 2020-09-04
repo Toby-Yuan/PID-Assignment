@@ -3,6 +3,7 @@ require_once './controllers/productController.php';
 require_once './controllers/helloController.php';
 $login = new helloC();
 $login->result->logout();
+$login->login();
 $test = new productC();
 ?>
 
@@ -31,7 +32,7 @@ $test = new productC();
             </div>
             <div></div>
             <div id="member">
-                <?= $login->login() ?>
+            <?= $login->checkLogin() ?>
             </div>
 
         </div>
@@ -43,7 +44,7 @@ $test = new productC();
             <a href="./hello">關於我們</a>
             <a href="#">熱門商品</a>
             <a href="./hello">聯絡我們</a>
-            <?= $login->login() ?>
+            <?= $login->checkLogin() ?>
         </div>
     </nav>
 

@@ -23,9 +23,11 @@ class oneProductM extends database{
     }
 
     public function add(){
-        $productId = $_GET["productId"];
-        $arrayNeed[$productId] = $_POST["need"];
-        array_push($_SESSION["productNeed"], $arrayNeed);
+        if(isset($_POST["submit"])){
+            $productId = $_GET["productId"];
+            $arrayNeed[$productId] = $_POST["need"];
+            array_push($_SESSION["productNeed"], $arrayNeed);
+        }
     }
 
 }

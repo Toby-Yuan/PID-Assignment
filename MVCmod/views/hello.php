@@ -2,6 +2,7 @@
 require_once './controllers/helloController.php';
 $test = new helloC();
 $test->result->logout();
+$test->login();
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +30,7 @@ $test->result->logout();
             </div>
             <div></div>
             <div id="member">
-                <?= $test->login() ?>
+            <?= $test->checkLogin() ?>
             </div>
 
         </div>
@@ -41,7 +42,7 @@ $test->result->logout();
             <a href="#about">關於我們</a>
             <a href="./product">熱門商品</a>
             <a href="#contact">聯絡我們</a>
-            <?= $test->login() ?>
+            <?= $test->checkLogin() ?>
         </div>
     </nav>
 

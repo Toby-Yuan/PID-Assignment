@@ -33,7 +33,11 @@ class helloC {
     public function login(){
         if($this->result->memberLogin() != ""){
             $_SESSION['uid'] = $this->result->memberLogin();
+        }
+    }
 
+    public function checkLogin(){
+        if(isset($_SESSION['uid'])){
             $memberShow = <<<membershow
             <div id="moreA">
                 <a href="./member">會員中心</a>
