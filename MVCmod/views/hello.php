@@ -71,7 +71,7 @@ $test->login();
         <?= $test->showTop() ?>
 
         <div id="link">
-            <a href="product.php">MORE _______</a>
+            <a href="./product">MORE _______</a>
         </div>
     </section>
 
