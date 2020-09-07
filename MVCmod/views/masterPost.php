@@ -15,7 +15,7 @@ $test = new masterPostC();
 
     <nav>
         <div id="box">
-            <h4>管理員: <?= $master["userName"] ?></h4>
+            <h4>管理員: <?= $test->result->member[0]['userName'] ?></h4>
             <a href="./master">商品列表</a>
             <a href="./masterMember">會員列表</a>
             <a href="./masterOrder">訂單管理</a>
@@ -50,7 +50,7 @@ $test = new masterPostC();
     </table>
 
     <div id="image">
-        <?= $test->image() ?>
+        <?= $test->chooseDayForImg() ?>
     </div>
 
 </body>
