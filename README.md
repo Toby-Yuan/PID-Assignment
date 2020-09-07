@@ -48,6 +48,10 @@
 # 資料庫檔案(請先複製資料庫格式)
 - database.sql
 
+# MVC網址
+- 顧客: http://localhost:8888/PID-Assignment/MVCmod/hello
+- 管理: http://localhost:8888/PID-Assignment/MVCmod/masterLogin
+
 # 進度
 - 08/24 12:41 主畫面前端切版
 - 08/24 14:15 商品頁面切版
