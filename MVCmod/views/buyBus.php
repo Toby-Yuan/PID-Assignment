@@ -66,6 +66,7 @@ $test->result->back();
 
         <label for="time" id="timeText">希望送達日期</label>
         <input type="date" name="time" id="time">
+        <p id="check"><?= ($test->result->addToDB() == 1)? "請選擇三天之後的日期" : "" ?></p>
 
         <div id="subGroup">
             <input type="submit" value="確認訂單" id="submit" name="submit">

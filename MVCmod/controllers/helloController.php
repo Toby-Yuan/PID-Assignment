@@ -18,9 +18,11 @@ class helloC {
             $image = base64_encode($image);
             $name = $value[2];
             $topShow = <<<topshow
+            <a href="./oneProduct?productId=$value[0]">
             <div class="products" style="background-image: url(data:image/jpg;charset:utf8;base64,$image)">
                 <div class="name">$name</div>
             </div>
+            </a>
             topshow;
 
             $show .= $topShow;

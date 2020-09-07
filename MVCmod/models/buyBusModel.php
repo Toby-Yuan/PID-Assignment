@@ -28,6 +28,12 @@ class buyBusM extends database{
         if(isset($_POST["submit"])){
             $nowtime = $_POST["time"];
             $orderTime = date("Y-m-d H:i:s");
+            $threeDay = date("Y-m-d", strtotime($today."+3 day"));
+
+            if($nowtime < $threeDay){
+                return 1;
+            }
+
             $addOrder = <<<addorder
             INSERT INTO memberOrder (memberId, orderDate, orderTime)
             VALUES ($memberId, '$nowtime', '$orderTime');
