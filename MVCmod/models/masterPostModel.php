@@ -71,7 +71,12 @@ class masterPostM extends database{
         WHERE DATEDIFF(NOW(), orderTime) < $day AND p.id = $pid
         sallserach;
         $sallNeed = self::query($sall);
-        return $sallNeed[0]['demand'];
+        if(isset($sallNeed[0]['demand'])){
+            $sallDemand = $sallNeed[0]['demand'];
+        }else{
+            $sallDemand = 0;
+        }
+        return $sallDemand;
     }
 
     public function needItDay($pid, $day1, $day2){
