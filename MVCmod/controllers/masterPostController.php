@@ -9,15 +9,13 @@ class masterPostC {
         $this->result = new masterPostM();
     }
 
-    public function chooseDay(){
+    public function detail(){
         if(isset($_POST["oneD"])){
             return $this->show(1);
         }
-
         if(isset($_POST["senD"])){
             return $this->show(7);
         }
-
         if(isset($_POST["oneM"])){
             return $this->show(30);
         }
@@ -65,67 +63,194 @@ class masterPostC {
         }
     }
 
-    public function show($val){
-        $income = 0;
+    public function show($day){
         $product = $this->result->product();
+        $need = [];
+        $oneIncome = [];
         $list = "";
-
         foreach($product as $key=>$value){
-            $sallDemand = $this->result->demand($val, $value[0], $value[2]);
+            $pid = $value[0];
+            $need[$pid] = 0;
+            $oneIncome[$pid] = 0;
+        }
+
+        $detail = $this->result->detail($day);
+        foreach($detail as $key=>$value){
+            $orderDetial = $this->result->orderDetail($value[0]);
+
+            foreach($orderDetial as $key2=>$value2){
+                $pid = $value2[0];
+                $need[$pid] += $value2[1];
+                $oneIncome[$pid] += ($value2[1] * $value2[2]);
+            }
+        }
+
+        $oldProduct = $this->result->oldProduct();
+        foreach($oldProduct as $key=>$value){
+            $needIt = 0;
+            $income = 0;
+            $productName = $value[0];
+            $productSame = $this->result->sameName($productName);
+
+            $nowId = $productSame[0]['productId'];
+            $needIt += $need[$nowId];
+            $income += $oneIncome[$nowId];
+            foreach($productSame as $key2=>$value2){
+                $pid = $value2[0];
+                $productNow = $this->result->productNow($pid);
+                
+                if(isset($productNow[0]['price'])){
+                    $price = $productNow[0]['price'];
+                }else{
+                    $price = "已下架";
+                }
+
+                if(isset($productNow[0]['inStock'])){
+                    $stock = $productNow[0]['inStock'];
+                }else{
+                    $stock = "已下架";
+                }
+
+                if($pid != $nowId){
+                    $needIt += $need[$pid];
+                    $income += $oneIncome[$pid];
+                }
+            }
 
             $one = <<<only
             <tr>
-            <td>$value[1]</td>
-            <td>$sallDemand[0]</td>
-            <td>$value[4]</td>
-            <td>$value[2]</td>
-            <td>$sallDemand[1]</td>
+            <td>$productName</td>
+            <td>$needIt</td>
+            <td>$stock</td>
+            <td>$price</td>
+            <td>$income</td>
             </tr>
             only;
-
-            $income += $sallDemand[1];
             $list .= $one;
         }
-        $list .= "<tr><td colspan='5'>總營收: $income</td></tr>";
+
+        $total = array_sum($oneIncome);
+
+        $list .= "<tr><td colspan='5'>總營收: $total</tr>";
+
         return $list;
     }
 
-    public function showChoose($day1, $day2){
-        $income = 0;
+    public function showChoose($smlDate, $bigDate){
         $product = $this->result->product();
+        $need = [];
+        $oneIncome = [];
         $list = "";
-
         foreach($product as $key=>$value){
-            $sallDemand = $this->result->demandDay($day1, $day2, $value[0], $value[2]);
+            $pid = $value[0];
+            $need[$pid] = 0;
+            $oneIncome[$pid] = 0;
+        }
+
+        $detail = $this->result->detailChoose($smlDate, $bigDate);
+        foreach($detail as $key=>$value){
+            $orderDetial = $this->result->orderDetail($value[0]);
+
+            foreach($orderDetial as $key2=>$value2){
+                $pid = $value2[0];
+                $need[$pid] += $value2[1];
+                $oneIncome[$pid] += ($value2[1] * $value2[2]);
+            }
+        }
+
+        $oldProduct = $this->result->oldProduct();
+        foreach($oldProduct as $key=>$value){
+            $needIt = 0;
+            $income = 0;
+            $productName = $value[0];
+            $productSame = $this->result->sameName($productName);
+
+            $nowId = $productSame[0]['productId'];
+            $needIt += $need[$nowId];
+            $income += $oneIncome[$nowId];
+            foreach($productSame as $key2=>$value2){
+                $pid = $value2[0];
+                $productNow = $this->result->productNow($pid);
+                
+                if(isset($productNow[0]['price'])){
+                    $price = $productNow[0]['price'];
+                }else{
+                    $price = "已下架";
+                }
+
+                if(isset($productNow[0]['inStock'])){
+                    $stock = $productNow[0]['inStock'];
+                }else{
+                    $stock = "已下架";
+                }
+
+                if($pid != $nowId){
+                    $needIt += $need[$pid];
+                    $income += $oneIncome[$pid];
+                }
+            }
 
             $one = <<<only
             <tr>
-            <td>$value[1]</td>
-            <td>$sallDemand[0]</td>
-            <td>$value[4]</td>
-            <td>$value[2]</td>
-            <td>$sallDemand[1]</td>
+            <td>$productName</td>
+            <td>$needIt</td>
+            <td>$stock</td>
+            <td>$price</td>
+            <td>$income</td>
             </tr>
             only;
-
-            $income += $sallDemand[1];
             $list .= $one;
         }
-        $list .= "<tr><td colspan='5'>總營收: $income</td></tr>";
+
+        $total = array_sum($oneIncome);
+
+        $list .= "<tr><td colspan='5'>總營收: $total</tr>";
+
         return $list;
     }
 
-    public function image($var){
+    public function image($day){
         $product = $this->result->product();
+        $need = [];
+        $name = [];
+        $demand = [];
+
         foreach($product as $key=>$value){
-            $need = $this->result->needIt($value[0], $var);
-            $name[] = $value[1];
-            $array[] = $need;
+            $pid = $value[0];
+            $need[$pid] = 0;
+        }
+
+        $detail = $this->result->detail($day);
+        foreach($detail as $key=>$value){
+            $orderDetial = $this->result->orderDetail($value[0]);
+
+            foreach($orderDetial as $key2=>$value2){
+                $pid = $value2[0];
+                $need[$pid] += $value2[1];
+            }
+        }
+
+        $oldProduct = $this->result->oldProduct();
+        foreach($oldProduct as $key=>$value){
+            $needIt = 0;
+            $productName = $value[0];
+            $productSame = $this->result->sameName($productName);
+
+            $nowId = $productSame[0]['productId'];
+            $needIt += $need[$nowId];
+            foreach($productSame as $key2=>$value2){
+                $pid = $value2[0];
+                if($pid != $nowId){
+                    $needIt += $need[$pid];
+                }
+            }
+
+            $name[] = $productName;
+            $demand[] = $needIt;
         }
 
         $name = json_encode($name);
-        $array = json_encode($array);
-        
+        $demand = json_encode($demand);
 
         $image = <<<detail
         <canvas id="myChart"  width="200" height="100"></canvas>
@@ -140,10 +265,10 @@ class masterPostC {
                 data: {
                     labels: $name,
                     datasets: [{
-                        label: '$var 天銷售量',
+                        label: '$day 天銷售量',
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
-                        data: $array
+                        data: $demand
                     }]
                 },
 
@@ -155,17 +280,48 @@ class masterPostC {
         return $image;
     }
 
-    public function imageChoose($day1, $day2){
+    public function imageChoose($smlDate, $bigDate){
         $product = $this->result->product();
+        $need = [];
+        $name = [];
+        $demand = [];
+
         foreach($product as $key=>$value){
-            $need = $this->result->needItDay($value[0], $day1, $day2);
-            $name[] = $value[1];
-            $array[] = $need;
+            $pid = $value[0];
+            $need[$pid] = 0;
+        }
+
+        $detail = $this->result->detailChoose($smlDate, $bigDate);
+        foreach($detail as $key=>$value){
+            $orderDetial = $this->result->orderDetail($value[0]);
+
+            foreach($orderDetial as $key2=>$value2){
+                $pid = $value2[0];
+                $need[$pid] += $value2[1];
+            }
+        }
+
+        $oldProduct = $this->result->oldProduct();
+        foreach($oldProduct as $key=>$value){
+            $needIt = 0;
+            $productName = $value[0];
+            $productSame = $this->result->sameName($productName);
+
+            $nowId = $productSame[0]['productId'];
+            $needIt += $need[$nowId];
+            foreach($productSame as $key2=>$value2){
+                $pid = $value2[0];
+                if($pid != $nowId){
+                    $needIt += $need[$pid];
+                }
+            }
+
+            $name[] = $productName;
+            $demand[] = $needIt;
         }
 
         $name = json_encode($name);
-        $array = json_encode($array);
-        
+        $demand = json_encode($demand);
 
         $image = <<<detail
         <canvas id="myChart"  width="200" height="100"></canvas>
@@ -180,10 +336,10 @@ class masterPostC {
                 data: {
                     labels: $name,
                     datasets: [{
-                        label: '$day1 ~ $day2',
+                        label: '銷售量',
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
-                        data: $array
+                        data: $demand
                     }]
                 },
 
@@ -193,7 +349,6 @@ class masterPostC {
         </script>
         detail;
         return $image;
-
     }
 }
 

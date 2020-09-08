@@ -92,6 +92,9 @@ class masterPostC {
             $productName = $value[0];
             $productSame = $this->result->sameName($productName);
 
+            $nowId = $productSame[0]['productId'];
+            $needIt += $need[$nowId];
+            $income += $oneIncome[$nowId];
             foreach($productSame as $key2=>$value2){
                 $pid = $value2[0];
                 $productNow = $this->result->productNow($pid);
@@ -108,8 +111,10 @@ class masterPostC {
                     $stock = "已下架";
                 }
 
-                $needIt += $need[$pid];
-                $income += $oneIncome[$pid];
+                if($pid != $nowId){
+                    $needIt += $need[$pid];
+                    $income += $oneIncome[$pid];
+                }
             }
 
             $one = <<<only
@@ -160,6 +165,9 @@ class masterPostC {
             $productName = $value[0];
             $productSame = $this->result->sameName($productName);
 
+            $nowId = $productSame[0]['productId'];
+            $needIt += $need[$nowId];
+            $income += $oneIncome[$nowId];
             foreach($productSame as $key2=>$value2){
                 $pid = $value2[0];
                 $productNow = $this->result->productNow($pid);
@@ -176,8 +184,10 @@ class masterPostC {
                     $stock = "已下架";
                 }
 
-                $needIt += $need[$pid];
-                $income += $oneIncome[$pid];
+                if($pid != $nowId){
+                    $needIt += $need[$pid];
+                    $income += $oneIncome[$pid];
+                }
             }
 
             $one = <<<only
@@ -226,9 +236,13 @@ class masterPostC {
             $productName = $value[0];
             $productSame = $this->result->sameName($productName);
 
+            $nowId = $productSame[0]['productId'];
+            $needIt += $need[$nowId];
             foreach($productSame as $key2=>$value2){
                 $pid = $value2[0];
-                $needIt += $need[$pid];
+                if($pid != $nowId){
+                    $needIt += $need[$pid];
+                }
             }
 
             $name[] = $productName;
@@ -293,9 +307,13 @@ class masterPostC {
             $productName = $value[0];
             $productSame = $this->result->sameName($productName);
 
+            $nowId = $productSame[0]['productId'];
+            $needIt += $need[$nowId];
             foreach($productSame as $key2=>$value2){
                 $pid = $value2[0];
-                $needIt += $need[$pid];
+                if($pid != $nowId){
+                    $needIt += $need[$pid];
+                }
             }
 
             $name[] = $productName;

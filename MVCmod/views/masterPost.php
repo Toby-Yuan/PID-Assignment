@@ -1,5 +1,5 @@
 <?php
-require_once './controllers/masterPostController.php';
+require_once './controllers/test.php';
 $test = new masterPostC();
 ?>
 
@@ -15,7 +15,7 @@ $test = new masterPostC();
 
     <nav>
         <div id="box">
-            <h4>管理員: <?= $test->result->member[0]['userName'] ?></h4>
+            <h4>管理員: </h4>
             <a href="./master">商品列表</a>
             <a href="./masterMember">會員列表</a>
             <a href="./masterOrder">訂單管理</a>
@@ -42,11 +42,12 @@ $test = new masterPostC();
             <th>商品名稱</th>
             <th>販售量</th>
             <th>現在庫存量</th>
-            <th>定價</th>
+            <th>現在定價</th>
             <th>單項營收</th>
         </tr>
 
-        <?= $test->chooseDay() ?>
+        <?= $test->detail(); ?>
+        
     </table>
 
     <div id="image">

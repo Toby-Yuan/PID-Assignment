@@ -19,78 +19,52 @@ class masterPostM extends database{
     }
 
     public function product(){
-        $search = self::query("SELECT * FROM product;");
+        $search = self::query("SELECT productId FROM oldProduct GROUP BY productId");
         return $search;
     }
 
-    public function demand($day, $pid, $price){
-        $oneIncome = 0;
-        $sall = <<<sallserach
-        SELECT SUM(demand) demand FROM product p
-        JOIN orderDetail od ON od.productId = p.id
-        JOIN memberOrder mo ON od.orderId = mo.id
-        WHERE DATEDIFF(NOW(), orderTime) < $day AND p.id = $pid
-        sallserach;
-        $search = self::query($sall);
-        if(isset($search[0]['demand'])){
-            $sallDemand = $search[0]['demand'];
-        }else{
-            $sallDemand = 0;
-        }
-        $oneIncome = $sallDemand*$price;
-
-        $array = [$sallDemand, $oneIncome];
-        return $array;
+    public function detail($day){
+        $search = self::query("SELECT * FROM memberOrder WHERE DATEDIFF(NOW(), orderTime) < $day");
+        return $search;
     }
 
-    public function demandDay($day1, $day2, $pid, $price){
-        $oneIncome = 0;
-        $sall = <<<sallserach
-        SELECT SUM(demand) demand FROM product p
-        JOIN orderDetail od ON od.productId = p.id
-        JOIN memberOrder mo ON od.orderId = mo.id
-        WHERE orderTime <= '$day2' AND orderTime >= '$day1' AND p.id = $pid
-        sallserach;
-        $search = self::query($sall);
-        if(isset($search[0]['demand'])){
-            $sallDemand = $search[0]['demand'];
-        }else{
-            $sallDemand = 0;
-        }
-        $oneIncome = $sallDemand*$price;
-
-        $array = [$sallDemand, $oneIncome];
-        return $array;
+    public function detailChoose($smlDate, $bigDate){
+        $search = self::query("SELECT * FROM memberOrder WHERE orderTime <= '$bigDate' AND orderTime >= '$smlDate'");
+        return $search;
     }
 
-    public function needIt($pid, $day){
-        $sall = <<<sallserach
-        SELECT SUM(demand) demand FROM product p
-        JOIN orderDetail od ON od.productId = p.id
-        JOIN memberOrder mo ON od.orderId = mo.id
-        WHERE DATEDIFF(NOW(), orderTime) < $day AND p.id = $pid
-        sallserach;
-        $sallNeed = self::query($sall);
-        if(isset($sallNeed[0]['demand'])){
-            $sallDemand = $sallNeed[0]['demand'];
-        }else{
-            $sallDemand = 0;
-        }
-        return $sallDemand;
+    public function orderDetail($oid){
+        $search = <<<searchIt
+        SELECT od.productId, demand,
+        (SELECT price FROM oldProduct WHERE productId = (SELECT od.productId) AND changeTime = (SELECT ops.changeTime)) price
+        FROM memberOrder mo
+        JOIN orderDetail od ON od.orderId = mo.id
+        JOIN (SELECT op.productId, max(changeTime) changeTime FROM oldProduct op
+            JOIN orderDetail od ON od.productId = op.productId
+            JOIN memberOrder mo ON mo.id = od.orderId
+            WHERE mo.id = $oid AND changeTime < orderTime
+            GROUP BY op.productId) ops ON ops.productId = od.productId
+        WHERE mo.id = $oid
+        searchIt;
+        $searchIt = self::query($search);
+
+        return $searchIt;
     }
 
-    public function needItDay($pid, $day1, $day2){
-        $sall = <<<sallserach
-        SELECT SUM(demand) demand FROM product p
-        JOIN orderDetail od ON od.productId = p.id
-        JOIN memberOrder mo ON od.orderId = mo.id
-        WHERE orderTime <= '$day2' AND orderTime >= '$day1' AND p.id = $pid
-        sallserach;
-        $sallNeed = self::query($sall);
-        return $sallNeed[0]['demand'];
-        
+    public function oldProduct(){
+        $search = self::query("SELECT productName FROM oldProduct GROUP BY productName");
+        return $search;
     }
 
+    public function sameName($pnm){
+        $search = self::query("SELECT productId FROM oldProduct WHERE productName = '$pnm'");
+        return $search;
+    }
+
+    public function productNow($pid){
+        $search = self::query("SELECT price, inStock FROM product WHERE id = $pid");
+        return $search;
+    }
 }
 
 ?>
