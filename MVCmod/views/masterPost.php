@@ -12,7 +12,7 @@ $test = new masterPostC();
     <link rel="stylesheet" href="CSS/masterPortStyle.css">
 </head>
 <body>
-
+    <!-- 管理端各頁面連結 -->
     <nav>
         <div id="box">
             <h4>管理員: <?= $test->result->member[0]['userName'] ?></h4>
@@ -24,6 +24,7 @@ $test = new masterPostC();
         </div>
     </nav>
 
+    <!-- 選擇顯示天數 -->
     <form action="" method="post" id="chooseTime">
         <input type="submit" value="一天內" name="oneD">
         <input type="submit" value="七天內" name="senD">
@@ -37,6 +38,7 @@ $test = new masterPostC();
         </div>
     </form>
 
+    <!-- 報表列表顯示 -->
     <table>
         <tr>
             <th>商品名稱</th>
@@ -50,6 +52,7 @@ $test = new masterPostC();
         
     </table>
 
+    <!-- 直條圖 -->
     <div id="image">
         <?= $test->chooseDayForImg() ?>
     </div>

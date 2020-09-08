@@ -54,7 +54,7 @@ $test->result->updateMember();
     <!-- 輪轉圖 -->
     <div id="banner"></div>
 
-    <!-- 創建表格 -->
+    <!-- 更新表格 -->
     <div id="formTitle">修改資料</div>
     <form action="" method="post">
         <label for="newName">帳號</label>

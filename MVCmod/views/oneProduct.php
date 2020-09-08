@@ -97,6 +97,7 @@ $test->result->add();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function (){
+            // 設定數量增減效果
             var need = $("#need").val();
             $("#sub").on("click",function (){
                 need++;
@@ -110,6 +111,7 @@ $test->result->add();
                 }
             });
 
+            // 顯示和隱藏登入區塊
             $("#login").hide();
 
             $("#member").on("click", function(){

@@ -92,13 +92,16 @@ $test->result->back();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
+            // 計算單項總額
             function totalPrice (number, price){
                 var total = number * price;
                 return total;
             }
 
+            // 本次購買總額
             var totalA = 0;
 
+            // 針對各項購物車有增加, 減少和取消的效果
             <?php $arrayNeed= $_SESSION["productNeed"];
             for($i = 1; $i <= count($arrayNeed); $i++) { 
             ?>

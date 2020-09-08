@@ -12,6 +12,7 @@ $test = new masterOrderC();
     <link rel="stylesheet" href="CSS/masterOrderStyle.css">
 </head>
 <body>
+    <!-- 管理端各頁面連結 -->
     <nav>
         <div id="box">
             <h4>管理員: <?= $test->result->member[0]['userName'] ?></h4>
@@ -23,6 +24,7 @@ $test = new masterOrderC();
         </div>
     </nav>
 
+    <!-- 訂單管理列表 -->
     <form action="" method="post" id="allOrder">
         <table>
             <tr>

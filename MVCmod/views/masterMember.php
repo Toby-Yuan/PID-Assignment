@@ -12,6 +12,7 @@ $test = new masterMemberC();
     <link rel="stylesheet" href="CSS/masterMemberStyle.css">
 </head>
 <body>
+    <!-- 管理端各頁面連結 -->
     <nav>
         <div id="box">
             <h4>管理員: <?= $test->result->member[0]['userName'] ?></h4>
@@ -23,6 +24,7 @@ $test = new masterMemberC();
         </div>
     </nav>
 
+    <!-- 會員管理列表 -->
     <form action="" method="post" id="allProduct">
         <table>
             <tr>

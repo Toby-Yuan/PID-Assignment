@@ -12,6 +12,7 @@ $test->result->newPro();
     <link rel="stylesheet" href="CSS/masterStyle.css">
 </head>
 <body>
+    <!-- 管理端各頁面連結 -->
     <nav>
         <div id="box">
             <h4>管理員: <?= $test->result->member[0]['userName'] ?></h4>
@@ -23,6 +24,7 @@ $test->result->newPro();
         </div>
     </nav>
 
+    <!-- 商品管理列表 -->
     <form action="" method="post" id="allProduct">
         <table>
             <tr>
@@ -41,6 +43,7 @@ $test->result->newPro();
         </table>
     </form>
 
+    <!-- 新增商品表格 -->
     <form action="" method="post" enctype="multipart/form-data">
         <table>
             <tr>
