@@ -1,5 +1,5 @@
 <?php
-require_once './controllers/test.php';
+require_once './controllers/masterPostController.php';
 $test = new masterPostC();
 ?>
 
@@ -15,7 +15,7 @@ $test = new masterPostC();
 
     <nav>
         <div id="box">
-            <h4>管理員: </h4>
+            <h4>管理員: <?= $test->result->member[0]['userName'] ?></h4>
             <a href="./master">商品列表</a>
             <a href="./masterMember">會員列表</a>
             <a href="./masterOrder">訂單管理</a>
