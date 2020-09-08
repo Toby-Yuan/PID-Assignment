@@ -10,6 +10,7 @@ class buyBusC {
         $this->result = new buyBusM();
     }
 
+    // 顯示此次購物清單
     public function buyList(){
         $arrayNeed = $_SESSION["productNeed"];
         $list = "";

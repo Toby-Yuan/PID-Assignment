@@ -17,11 +17,13 @@ class buyBusM extends database{
         }
     }
 
+    // 抓取該商品資訊
     public function searchIt($value){
         $search = self::query("SELECT id, productName, price, productImg, inStock FROM product WHERE id = $value");
         return $search;
     }
 
+    // 購物車內容新增至資料庫
     public function addToDB(){
         $arrayNeed = $_SESSION["productNeed"];
         $memberId = $_SESSION["uid"];
@@ -34,15 +36,18 @@ class buyBusM extends database{
                 return 1;
             }
 
+            // 先新增訂單
             $addOrder = <<<addorder
             INSERT INTO memberOrder (memberId, orderDate, orderTime)
             VALUES ($memberId, '$nowtime', '$orderTime');
             addorder;
             $addIt = self::query($addOrder);
         
+            // 搜尋此次交易訂單編號
             $searchOrder = self::query("SELECT id FROM memberOrder WHERE orderTime = '$orderTime' AND memberId = $memberId");
             $thisId = $searchOrder[0]["id"];
         
+            // 逐項加入至訂單明細
             $i = 1;
             foreach($arrayNeed as $key => $value){
                 foreach($value as $productId => $need){
@@ -70,6 +75,7 @@ class buyBusM extends database{
         }
     }
 
+    // 取消訂單
     public function back(){
         if(isset($_POST["cancel"])){
             unset($_SESSION["productNeed"]);

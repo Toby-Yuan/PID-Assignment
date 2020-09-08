@@ -9,6 +9,7 @@ class masterOrderC {
         $this->result = new masterOrderM();
     }
 
+    // 顯示所有訂單
     public function orderShow(){
         $list = $this->result->orderList();
         $show ="";

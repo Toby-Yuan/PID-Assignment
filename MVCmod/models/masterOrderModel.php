@@ -18,6 +18,7 @@ class masterOrderM extends database{
         $this->member = $search;
     }
 
+    // 抓取所有訂單
     public function orderList(){
         $searchOrder = <<<searchorder
         SELECT mo.id, orderDate, orderTime, delivery, userName  FROM memberOrder mo 
@@ -28,6 +29,7 @@ class masterOrderM extends database{
         return $result;
     }
 
+    // 抓取該訂單的所有明細
     public function detailGet($value){
         $searchOD = <<<searchod
         SELECT productName, demand
@@ -39,6 +41,7 @@ class masterOrderM extends database{
         return $search;
     }
 
+    // 確認已送達
     public function updateOrder($value){
         $update = self::query("UPDATE memberOrder SET delivery = 1 WHERE id = $value");
         header("location: ./masterOrder");

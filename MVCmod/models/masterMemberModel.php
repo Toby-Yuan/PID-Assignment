@@ -18,11 +18,13 @@ class masterMemberM extends database{
         $this->member = $search;
     }
 
+    // 抓取所有會員資料
     public function memberList(){
         $search = self::query("SELECT * FROM member");
         return $search;
     }
 
+    // 新增黑名單標記
     public function blackMember($value){
         if($member[0]['grade'] < 2){
             $blackIt = self::query("UPDATE member SET black = 1 WHERE id = $value");
@@ -30,6 +32,7 @@ class masterMemberM extends database{
         header("location: ./masterMember");
     }
 
+    // 移除黑名單標記
     public function whiteMember($value){
         if($member[0]['grade'] < 2){
             $blackIt = self::query("UPDATE member SET black = 0 WHERE id = $value");

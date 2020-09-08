@@ -18,21 +18,25 @@ class masterPostM extends database{
         $this->member = $search;
     }
 
+    // 抓取所有歷史紀錄上的產品編號
     public function product(){
         $search = self::query("SELECT productId FROM oldProduct GROUP BY productId");
         return $search;
     }
 
+    // 抓取所有符合天數內訂單記錄
     public function detail($day){
         $search = self::query("SELECT * FROM memberOrder WHERE DATEDIFF(NOW(), orderTime) < $day");
         return $search;
     }
 
+    // 抓取所有符合範圍內的訂單記錄
     public function detailChoose($smlDate, $bigDate){
         $search = self::query("SELECT * FROM memberOrder WHERE orderTime <= '$bigDate' AND orderTime >= '$smlDate'");
         return $search;
     }
 
+    // 抓取個訂單的所需要產品編號, 總需求, 以及訂單送出當下的產品價格
     public function orderDetail($oid){
         $search = <<<searchIt
         SELECT od.productId, demand,
@@ -51,16 +55,19 @@ class masterPostM extends database{
         return $searchIt;
     }
 
+    // 抓取所有歷史紀錄裡的產品名稱
     public function oldProduct(){
         $search = self::query("SELECT productName FROM oldProduct GROUP BY productName");
         return $search;
     }
 
+    // 抓取所有歷史紀錄裡有相同產品名稱的產品編號
     public function sameName($pnm){
         $search = self::query("SELECT productId FROM oldProduct WHERE productName = '$pnm'");
         return $search;
     }
 
+    // 抓取該產品現在的價格以及庫存
     public function productNow($pid){
         $search = self::query("SELECT price, inStock FROM product WHERE id = $pid");
         return $search;

@@ -9,6 +9,7 @@ class masterC {
         $this->result = new masterM();
     }
 
+    // 顯示管理商品列表
     public function listPro(){
         $product = $this->result->searchPro();
 
@@ -37,6 +38,7 @@ class masterC {
             <tr>
             only;
 
+            // 針對各列資料有不同動作
             if(isset($_POST["$update"])){
                 $productName = $_POST["$productName"];
                 $price = $_POST["$price"];

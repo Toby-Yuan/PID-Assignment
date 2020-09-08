@@ -18,11 +18,13 @@ class masterM extends database{
         $this->member = $search;
     }
 
+    // 抓取所有商品資訊
     public function searchPro(){
         $search = self::query("SELECT * FROM product");
         return $search;
     }
 
+    // 更新商品資訊並且加入至歷史紀錄
     public function update($v1, $v2, $v3, $v4){
         $time = date("Y-m-d H:i:s");
         $update = self::query("UPDATE product SET productName = '$v2', price = $v3, inStock = $v4 WHERE id = $v1");
@@ -30,6 +32,7 @@ class masterM extends database{
         header("location: ./master");
     }
 
+    // 刪除商品(歷史資料的不會刪除)
     public function delete($value){
         if($member[0]['grade'] < 3){
             $delete = self::query("DELETE FROM product WHERE id = $value");
@@ -37,6 +40,7 @@ class masterM extends database{
         }
     }
 
+    // 新增商品
     public function newPro(){
         if(isset($_POST["new"])){
             $newProduct = $_POST["newProduct"];

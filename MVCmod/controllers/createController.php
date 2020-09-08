@@ -9,6 +9,7 @@ class createC {
         $this->result = new createM();
     }
 
+    // 判斷各項資料是否重複
     public function nameCheck(){
         if($this->result->nameToC == 1){
             return "<p>帳號已使用</p>";

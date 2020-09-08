@@ -9,6 +9,7 @@ class masterMemberC {
         $this->result = new masterMemberM();
     }
 
+    // 顯示所有會員
     public function memberShow(){
         $list = $this->result->memberList();
         $show = "";
@@ -48,6 +49,7 @@ class masterMemberC {
                 $one .= $black;
             }
 
+            // 針對各列會員執行動作
             if(isset($_POST["$set"])){
                 $this->result->blackMember($value[0]);
             }

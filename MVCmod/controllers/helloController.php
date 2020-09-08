@@ -10,6 +10,7 @@ class helloC {
         $this->result = new helloM();
     }
 
+    // 顯示前三大熱門商品
     public function showTop(){
         $list = $this->result->searchTop();
         $show = "";
@@ -38,6 +39,7 @@ class helloC {
         }
     }
 
+    // 登出系統
     public function checkLogin(){
         if(isset($_SESSION['uid'])){
             $memberShow = <<<membershow

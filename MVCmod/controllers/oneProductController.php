@@ -9,6 +9,7 @@ class oneProductC {
         $this->result = new oneProductM();
     }
 
+    // 顯示該商品內容
     public function product(){
         $getPro = $this->result->showPro();
         $image = base64_encode($getPro[0]['productImg']);

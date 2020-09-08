@@ -16,12 +16,14 @@ class oneProductM extends database{
         }
     }
 
+    // 抓取指定商品資料
     public function showPro(){
         $productId = $_GET["productId"];
         $search = self::query("SELECT * FROM `product` WHERE id = $productId");
         return $search;
     }
 
+    // 加入至購物車
     public function add(){
         if(isset($_POST["submit"])){
             $productId = $_GET["productId"];

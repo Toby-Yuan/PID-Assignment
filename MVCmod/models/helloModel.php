@@ -5,6 +5,7 @@ session_start();
 
 class helloM extends database{
 
+    // 搜尋前三大熱門商品
     public function searchTop(){
         $searchList = <<<searchlist
         SELECT p.id, productImg, productName,

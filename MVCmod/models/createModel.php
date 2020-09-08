@@ -14,6 +14,7 @@ class createM extends database{
         return $search;
     }
 
+    // 建立帳號
     public function create(){
         if(isset($_POST["submit"])){
             
@@ -43,6 +44,7 @@ class createM extends database{
         }
     }
 
+    // 判斷各項資料是否重複
     public function check($v1, $v2, $v3, $v4){
         $c1 = $this->checkName($v1);
         $c2 = $this->checkTruth($v2);
@@ -52,6 +54,7 @@ class createM extends database{
         return $c1+$c2+$c3+$c4;
     }
 
+    // 用戶名
     public function checkName($name){
         $get = $this->searchAll();
         foreach($get as $key=>$value){
@@ -62,6 +65,7 @@ class createM extends database{
         }
     }
 
+    // 真實姓名
     public function checkTruth($truth){
         $get = $this->searchAll();
         foreach($get as $key=>$value){
@@ -72,6 +76,7 @@ class createM extends database{
         }
     }
 
+    // 電子信箱
     public function checkMail($mail){
         $get = $this->searchAll();
         foreach($get as $key=>$value){
@@ -82,6 +87,7 @@ class createM extends database{
         }
     }
 
+    // 手機號碼
     public function checkPhone($phone){
         $get = $this->searchAll();
         foreach($get as $key=>$value){

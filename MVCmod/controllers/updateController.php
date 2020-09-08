@@ -11,6 +11,7 @@ class updateC {
         $this->form();
     }
 
+    // 顯示此使用者各項資訊
     public function form(){
         $get = $this->result->searchMember();
         foreach($get as $key=>$value){

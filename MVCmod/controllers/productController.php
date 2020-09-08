@@ -9,6 +9,7 @@ class productC {
         $this->result = new productM();
     }
 
+    // 顯示商品清單
     public function listPro(){
         $list = "";
         foreach($this->result->searchPro() as $key=>$value){

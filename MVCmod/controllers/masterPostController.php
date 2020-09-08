@@ -9,6 +9,7 @@ class masterPostC {
         $this->result = new masterPostM();
     }
 
+    // 針對不同按鈕顯示不同時間區間的報表
     public function detail(){
         if(isset($_POST["oneD"])){
             return $this->show(1);
@@ -63,8 +64,11 @@ class masterPostC {
         }
     }
 
+    // 顯示為天數的報表
     public function show($day){
         $product = $this->result->product();
+
+        // 項目歸零
         $need = [];
         $oneIncome = [];
         $list = "";
@@ -74,6 +78,7 @@ class masterPostC {
             $oneIncome[$pid] = 0;
         }
 
+        // 抓取符合天數內的所有訂單, 並且計算該訂單所需的商品數量以及單項營收
         $detail = $this->result->detail($day);
         foreach($detail as $key=>$value){
             $orderDetial = $this->result->orderDetail($value[0]);
@@ -85,6 +90,7 @@ class masterPostC {
             }
         }
 
+        // 顯示所有商品報表, 如果產品編號不同但產品名稱相同則視為相同
         $oldProduct = $this->result->oldProduct();
         foreach($oldProduct as $key=>$value){
             $needIt = 0;
@@ -99,6 +105,7 @@ class masterPostC {
                 $pid = $value2[0];
                 $productNow = $this->result->productNow($pid);
                 
+                // 歷史紀錄有但現在產品資料沒有的視為已下架
                 if(isset($productNow[0]['price'])){
                     $price = $productNow[0]['price'];
                 }else{
@@ -136,6 +143,7 @@ class masterPostC {
         return $list;
     }
 
+    // 顯示時間區間的報表
     public function showChoose($smlDate, $bigDate){
         $product = $this->result->product();
         $need = [];
@@ -209,6 +217,7 @@ class masterPostC {
         return $list;
     }
 
+    // 顯示天數的直條圖
     public function image($day){
         $product = $this->result->product();
         $need = [];
@@ -280,6 +289,7 @@ class masterPostC {
         return $image;
     }
 
+    // 顯示時間區間的直條圖
     public function imageChoose($smlDate, $bigDate){
         $product = $this->result->product();
         $need = [];

@@ -9,6 +9,7 @@ class masterLoginM extends database{
 
     }
 
+    // 登入系統
     public function login(){
         if(isset($_POST["submit"])){
             $userName = $_POST["masterName"];

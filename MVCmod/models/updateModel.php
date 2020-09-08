@@ -12,12 +12,14 @@ class updateM extends database{
         }
     }
 
+    // 抓取此使用者資訊
     public function searchMember(){
         $id = $_SESSION["uid"];
         $search = self::query("SELECT * FROM member WHERE id = $id");
         return $search;
     }
 
+    // 更改會員資料
     public function updateMember(){
         if(isset($_POST["submit"])){
             if(isset($_POST["check"])){
