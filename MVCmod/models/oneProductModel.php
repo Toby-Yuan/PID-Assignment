@@ -26,9 +26,18 @@ class oneProductM extends database{
     // 加入至購物車
     public function add(){
         if(isset($_POST["submit"])){
-            $productId = $_GET["productId"];
-            $arrayNeed[$productId] = $_POST["need"];
-            array_push($_SESSION["productNeed"], $arrayNeed);
+            $product = $this->showPro();
+            $checkstock = $product[0]['inStock'] - $_POST["need"];
+
+            if($_POST["need"] <= 0){
+                return "請添購至少一個";
+            }else if($checkstock >= 0){
+                $productId = $_GET["productId"];
+                $arrayNeed[$productId] = $_POST["need"];
+                array_push($_SESSION["productNeed"], $arrayNeed);
+            }else{
+                return "庫存量不足";
+            }
         }
     }
 

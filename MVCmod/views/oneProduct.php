@@ -5,7 +5,6 @@ $login = new helloC();
 $login->result->logout();
 $login->login();
 $test = new oneProductC();
-$test->result->add();
 ?>
 
 <!DOCTYPE html>
