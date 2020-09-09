@@ -69,7 +69,7 @@ $test->result->add();
                     <input type="text" name="userName" id="userName">
                     <label for="userPassword">密碼</label>
                     <input type="password" name="userPassword" id="userPassword">
-                    <input type="submit" value="送出" id="submit" name="submit1">
+                    <input type="submit" value="送出" id="submit" name="login">
                     <a href="./create">會員註冊</a>
                 </form>
                 <button id="close">X</button>

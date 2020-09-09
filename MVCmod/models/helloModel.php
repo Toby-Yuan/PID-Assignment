@@ -20,7 +20,7 @@ class helloM extends database{
 
     // 登入系統
     public function memberLogin(){
-        if($_POST["submit"]){
+        if($_POST["login"]){
             $userName = $_POST["userName"];
             $userPassword = $_POST["userPassword"];
             $userPassword = sha1($userPassword);
