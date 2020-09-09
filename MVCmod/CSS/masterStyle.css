@@ -59,7 +59,8 @@ form .id {
 
 form input[type="text"] {
   width: 100%;
-  border: none;
+  border-width: 0 0 2px;
+  border-color: black;
   height: 30px;
 }
 
