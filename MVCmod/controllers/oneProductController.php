@@ -34,7 +34,7 @@ class oneProductC {
 
             <h2>$error</h2>
 
-            <input type="submit" value="送出" name="submit">
+            <input type="submit" value="送出" name="submit" id="buyBus">
         </form>
         showit;
 
